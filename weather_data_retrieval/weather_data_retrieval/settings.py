@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'data_retrieval.apps.DataRetrievalConfig',
+    "rest_framework",
+    "rest_framework_swagger",
+    "rest_framework.authtoken",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
