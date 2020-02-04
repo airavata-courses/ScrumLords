@@ -1,19 +1,18 @@
-package com.preprocessor.preprocessormicroservice;
-
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
+package com.postprocessor.Postprocessormicroservice;
 
 import java.util.Arrays;
 
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class PreprocessorMicroserviceApplication {
+public class PostprocessorMicroserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PreprocessorMicroserviceApplication.class, args);
+		SpringApplication.run(PostprocessorMicroserviceApplication.class, args);
 	}
 	
 	@Bean

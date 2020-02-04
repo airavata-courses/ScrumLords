@@ -1,10 +1,10 @@
-package com.preprocessor.preprocessormicroservice;
+package com.postprocessor.Postprocessormicroservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PreprocessorMicroserviceApplicationTests {
+class PostprocessorMicroserviceApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -8,11 +8,11 @@
 		<version>2.2.4.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.preprocessor</groupId>
-	<artifactId>preprocessor-microservice</artifactId>
+	<groupId>com.postprocessor</groupId>
+	<artifactId>Postprocessor-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>preprocessor-microservice</name>
-	<description>Preprocessing Microservice</description>
+	<name>Postprocessor-microservice</name>
+	<description>Microservice to support postprocessing and analysis</description>
 
 	<properties>
 		<java.version>1.8</java.version>
