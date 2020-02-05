@@ -45,6 +45,12 @@ ul {
     background: url('../img/bg-1.jpg') no-repeat center center/cover;
 }
 
+#dashboard {
+    font-family: 'Montserrat', sans-serif;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
 /* Utilities */
 .container {
     width: 100%;
@@ -141,12 +147,12 @@ form {
     margin: 0 auto;
 }
 
- ::-webkit-input-placeholder {
+form ::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: white;
 }
 
- :-moz-placeholder {
+form :-moz-placeholder {
   /* Firefox 18- */
   color: white;
 }
@@ -206,4 +212,46 @@ form.form input[type="submit"]:hover
 {
     transition: 0.9s ease;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+/* User Dashboard */
+.search-wrap {
+    display: flex;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 7%;
+}
+
+.searchTerm {
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: black;
+    width: 100%;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.searchTerm .input-text::-webkit-input-placeholder {
+    color:black;
+}
+
+.searchTerm .input-text::-moz-placeholder {
+    color:black;
+}
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
 }
