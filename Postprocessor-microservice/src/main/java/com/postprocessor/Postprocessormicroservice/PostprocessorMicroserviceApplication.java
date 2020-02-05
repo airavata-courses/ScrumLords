@@ -18,13 +18,13 @@ public class PostprocessorMicroserviceApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
-			System.out.println("Let's inspect the beans:");
+			System.out.println("SERVICE IS RUNNING!!!");
 			
-			String[] beanNames = ctx.getBeanDefinitionNames();
-			Arrays.parallelSort(beanNames);
-			for (String beanName : beanNames) {
-				System.out.println(beanName);
-			}
+			//String[] beanNames = ctx.getBeanDefinitionNames();
+			//Arrays.parallelSort(beanNames);
+			//for (String beanName : beanNames) {
+			//	System.out.println(beanName);
+			//}
 		};
 	}
 
