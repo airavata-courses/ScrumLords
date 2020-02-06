@@ -13,14 +13,15 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 
-# from api_manager.views import start_session_pipeline, get_pubsub_data
-# from views import start_session_pipeline, get_pubsub_data
-from api_manager.views import start_session_pipeline
+from api_manager.pubsub.views.session_create import start_session_pipeline
+from api_manager.pubsub.views.session_status import get_session_status
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(r"session/create", start_session_pipeline),
+    url(r"^session/(?P<session_id>\w+)/status", get_session_status)
 ]
