@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+# from api_manager.views import start_session_pipeline, get_pubsub_data
+# from views import start_session_pipeline, get_pubsub_data
 from api_manager.views import start_session_pipeline
 
 urlpatterns = [
