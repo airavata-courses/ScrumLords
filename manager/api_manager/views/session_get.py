@@ -10,8 +10,7 @@ from api_manager.serializers import SessionSerializer
 @api_view(["GET"])
 def get_all_sessions(request, user_id):
     response = SessionSerializer(
-        Session.objects.filter(user_id=user_id).all(),
-        many=True,
+        Session.objects.filter(user_id=user_id).all(), many=True
     ).data
     return Response({"data": response}, status=status.HTTP_200_OK)
 

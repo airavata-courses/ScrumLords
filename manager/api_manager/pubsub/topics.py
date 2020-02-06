@@ -135,8 +135,7 @@ def get_pubsub_config():
 
 if __name__ == "__main__":
     if sys.argv[1] == "list":
-        list_topics(sys.argv[2]) if len(
-            sys.argv) > 2 else list_topics(project_id)
+        list_topics(sys.argv[2]) if len(sys.argv) > 2 else list_topics(project_id)
     elif sys.argv[1] == "create":
         [
             create_topic(project_id=project_id, topic_name=topic)

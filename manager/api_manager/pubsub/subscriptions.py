@@ -15,8 +15,7 @@ def create_subscription(project_id, topic_name, subscription_name, endpoint):
     # [START pubsub_create_pull_subscription]
     try:
         topic_path = subscriber.topic_path(project_id, topic_name)
-        subscription_path = subscriber.subscription_path(
-            project_id, subscription_name)
+        subscription_path = subscriber.subscription_path(project_id, subscription_name)
 
         push_config = pubsub_v1.types.PushConfig(push_endpoint=endpoint)
 
@@ -35,8 +34,7 @@ def create_subscription(project_id, topic_name, subscription_name, endpoint):
 def delete_subscription(project_id, subscription_name):
     """Deletes an existing Pub/Sub topic."""
     try:
-        subscription_path = subscriber.subscription_path(
-            project_id, subscription_name)
+        subscription_path = subscriber.subscription_path(project_id, subscription_name)
         subscriber.delete_subscription(subscription_path)
         print("Subscription deleted: {}".format(subscription_path))
     except (
@@ -72,8 +70,7 @@ def update_subscription(project_id, subscription_name, endpoint):
     its topic, are not modifiable.
     """
 
-    subscription_path = subscriber.subscription_path(
-        project_id, subscription_name)
+    subscription_path = subscriber.subscription_path(project_id, subscription_name)
 
     push_config = pubsub_v1.types.PushConfig(push_endpoint=endpoint)
 
@@ -149,8 +146,7 @@ if __name__ == "__main__":
         ]
     elif sys.argv[1] == "list_topic":
         [
-            list_subscriptions_in_topic(
-                project_id=project_id, topic_name=topic_name)
+            list_subscriptions_in_topic(project_id=project_id, topic_name=topic_name)
             for topic_name in sys.argv[2:]
         ] if len(sys.argv) > 2 else [
             list_subscriptions_in_topic(project_id=project_id, topic_name=key)
