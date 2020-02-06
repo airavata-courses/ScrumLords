@@ -1,9 +1,12 @@
+import uuid
+
 from django.db import models
 
 from model_utils.models import SoftDeletableModel, TimeStampedModel
 
 
 class Session(TimeStampedModel, SoftDeletableModel):
+    visible_id = models.UUIDField(default=uuid.uuid4, editable=False, null=False)
     geo_id = models.IntegerField(null=False)
     name = models.CharField(max_length=100, null=False)
     alternate_names = models.CharField(max_length=1200, null=True)
