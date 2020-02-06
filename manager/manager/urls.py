@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from api_manager.pubsub.views.session_create import start_session_pipeline
-from api_manager.pubsub.views.session_status import get_session_status
+from api_manager.pubsub.views.session_status import get_session_status, update_session_status
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path(r"session/create", start_session_pipeline),
-    url(r"^session/(?P<session_id>\w+)/status", get_session_status)
+    url(r"^session/(?P<session_id>\w+)/status", get_session_status),
+    url(r"^session/status", update_session_status)
 ]
