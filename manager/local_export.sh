@@ -1,3 +1,4 @@
+export DJANGO_ENV="development"
 export POSTGRES_USER="postgres"
 export POSTGRES_DB="wf_development"
 export POSTGRES_PASSWORD="EI6dbPfDn6jCBnOn"
