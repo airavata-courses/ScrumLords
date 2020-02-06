@@ -19,5 +19,5 @@ class SessionSerializer(serializers.ModelSerializer):
             "elevation",
             "timezone",
             "status",
-            "user_id"
+            "user_id",
         )

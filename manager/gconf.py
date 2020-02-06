@@ -5,7 +5,7 @@ bind = "0.0.0.0:8000"
 accesslog = "-"
 
 if os.environ["DJANGO_ENV"] == "development":
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'manager.settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "manager.settings")
 else:
     pass
 

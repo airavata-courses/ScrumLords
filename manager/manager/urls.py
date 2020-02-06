@@ -19,6 +19,6 @@ from django.urls import path
 from api_manager.views import start_session_pipeline
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(r"session/create", start_session_pipeline)
+    path("admin/", admin.site.urls),
+    path(r"session/create", start_session_pipeline),
 ]

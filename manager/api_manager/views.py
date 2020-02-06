@@ -44,7 +44,4 @@ def start_session_pipeline(request):
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()
 
-    return Response(
-        {"data": session_serializer.data},
-        status=status.HTTP_200_OK,
-    )
+    return Response({"data": session_serializer.data}, status=status.HTTP_200_OK)
