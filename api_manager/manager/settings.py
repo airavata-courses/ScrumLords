@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'manager.apps.ManagerConfig',
+    "rest_framework",
+    # "rest_framework_swagger",
+    # "rest_framework.authtoken",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -50,11 +54,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'api_manager.urls'
+ROOT_URLCONF = 'manager.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2'
+        'BACKEND': 'django.template.backends.django.DjangoTemplates'
         ,
         'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
@@ -70,16 +74,26 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api_manager.wsgi.application'
+WSGI_APPLICATION = 'manager.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+db_name = os.getenv("POSTGRES_DB", "postgres")
+db_user = os.getenv("POSTGRES_USER", "postgres")
+db_password = os.getenv("POSTGRES_PASSWORD", "")
+host = os.getenv("POSTGRES_HOST", "localhost")
+port = os.getenv("POSTGRES_PORT", "5432")
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": db_name,
+        "USER": db_user,
+        "PASSWORD": db_password,
+        "HOST": host,
+        "PORT": port,
     }
 }
 
