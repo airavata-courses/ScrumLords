@@ -10,33 +10,52 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Session',
+            name="Session",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('is_removed', models.BooleanField(default=False)),
-                ('visible_id', models.UUIDField(default=uuid.uuid4, editable=False)),
-                ('geo_id', models.IntegerField()),
-                ('name', models.CharField(max_length=100)),
-                ('alternate_names', models.CharField(max_length=1200, null=True)),
-                ('latitude', models.CharField(max_length=25)),
-                ('longitude', models.CharField(max_length=25)),
-                ('country_code', models.CharField(max_length=5)),
-                ('admin_code', models.CharField(max_length=5, null=True)),
-                ('population', models.IntegerField()),
-                ('elevation', models.CharField(max_length=15, null=True)),
-                ('timezone', models.CharField(max_length=30)),
-                ('status', models.CharField(max_length=15)),
-                ('user_id', models.IntegerField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("is_removed", models.BooleanField(default=False)),
+                ("visible_id", models.UUIDField(default=uuid.uuid4, editable=False)),
+                ("geo_id", models.IntegerField()),
+                ("name", models.CharField(max_length=100)),
+                ("alternate_names", models.CharField(max_length=1200, null=True)),
+                ("latitude", models.CharField(max_length=25)),
+                ("longitude", models.CharField(max_length=25)),
+                ("country_code", models.CharField(max_length=5)),
+                ("admin_code", models.CharField(max_length=5, null=True)),
+                ("population", models.IntegerField()),
+                ("elevation", models.CharField(max_length=15, null=True)),
+                ("timezone", models.CharField(max_length=30)),
+                ("status", models.CharField(max_length=15)),
+                ("user_id", models.IntegerField()),
             ],
-            options={
-                'db_table': 'sessions',
-            },
-        ),
+            options={"db_table": "sessions"},
+        )
     ]
