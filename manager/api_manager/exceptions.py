@@ -4,7 +4,7 @@ import logging
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
-from rest_framework import status
+from rest_framework import status, exceptions
 from rest_framework.exceptions import ValidationError
 from rest_framework.utils import json
 from rest_framework.views import exception_handler
@@ -61,3 +61,10 @@ def resource_not_found_404(request):
         {"status_code": 404, "error": "The resource was not found"},
         status=status.HTTP_404_NOT_FOUND,
     )
+
+
+def record_not_found_error(message):
+    """
+    :param message: the message to be printed
+    """
+    raise exceptions.NotFound(message)
