@@ -8,6 +8,8 @@ class SessionSerializer(serializers.ModelSerializer):
         model = Session
         fields = (
             "id",
+            "created",
+            "modified",
             "visible_id",
             "geo_id",
             "name",
