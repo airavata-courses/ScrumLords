@@ -16,9 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from manager.views.firestore_save import testing
+from manager.views.firestore_update import update_session
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path(r"session/firestore", testing)
+    path(r"session/firestore", update_session)
 ]
