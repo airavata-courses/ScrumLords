@@ -40,6 +40,8 @@ def retrieve_historical_data(request):
         "n_days_before": n_days_before,
         "n_days_after": n_days_after,
         "data_retrieved": weather_history,
+        "latitude": latitude,
+        "longitude": longitude,
         "session_id": data.get("session_id"),
     }
 
