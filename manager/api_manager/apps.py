@@ -1,4 +1,3 @@
-import pickle
 import firebase_admin
 from firebase_admin import firestore, credentials
 import os
