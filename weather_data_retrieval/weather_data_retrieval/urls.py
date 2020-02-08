@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from data_retrieval.views.data_retrieve import retrieve_historical_data
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("data_retrieval/get", retrieve_historical_data)
 ]
