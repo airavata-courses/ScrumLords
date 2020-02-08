@@ -1,5 +1,6 @@
 package com.postprocessor.Postprocessormicroservice;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.springframework.boot.CommandLineRunner;
@@ -16,7 +17,19 @@ import org.springframework.messaging.MessageHandler;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+import com.google.api.gax.core.CredentialsProvider;
+import com.google.api.gax.core.NoCredentialsProvider;
+import com.google.api.gax.grpc.GrpcTransportChannel;
+import com.google.api.gax.rpc.FixedTransportChannelProvider;
+import com.google.api.gax.rpc.TransportChannelProvider;
+import com.google.cloud.pubsub.v1.Publisher;
+import com.google.cloud.pubsub.v1.TopicAdminClient;
+import com.google.cloud.pubsub.v1.TopicAdminSettings;
 import com.google.common.collect.ImmutableMap;
+import com.google.pubsub.v1.ProjectTopicName;
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
 
 @SpringBootApplication
@@ -33,12 +46,7 @@ public class PostprocessorMicroserviceApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args -> {
 			System.out.println("SERVICE IS RUNNING!!!");
-			
-			//String[] beanNames = ctx.getBeanDefinitionNames();
-			//Arrays.parallelSort(beanNames);
-			//for (String beanName : beanNames) {
-			//	System.out.println(beanName);
-			//}
+		
 		};
 	}
 	
@@ -53,18 +61,5 @@ public class PostprocessorMicroserviceApplication {
         System.out.println("ThreadPoolTaskExecutor set");
         return threadPoolTaskExecutor;
     }
-	/*
-	  @Bean
-	  @ServiceActivator(inputChannel = "pubsubOutputChannel")
-	  public MessageHandler messageSender(PubSubTemplate pubsubTemplate) {
-	  return new PubSubMessageHandler(pubsubTemplate, "testTopic");
-	  }
-	
-	@MessagingGateway(defaultRequestChannel = "pubsubOutputChannel")
-	  public interface PubsubOutboundGateway {
-
-	  void sendToPubsub(String text);
-	  }
-	*/
 
 }

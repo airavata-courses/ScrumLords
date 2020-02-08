@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gcp.pubsub.PubSubAdmin;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.cloud.pubsub.v1.Publisher;
+
 
 @RestController
 public class PostprocessorController {
 
+	
+	
 	@Autowired
 	private PostProcessService postprocessService;
 	
@@ -25,7 +30,6 @@ public class PostprocessorController {
 	@RequestMapping(value = "/postprocess", method = RequestMethod.POST)
 	public ResponseEntity<?> postprocess(@RequestBody Map<String, Object> data) {
 		
-
 		postprocessService.getProcessedData(data);
 		return new ResponseEntity<>("Job Submitted", HttpStatus.ACCEPTED);
 	}
