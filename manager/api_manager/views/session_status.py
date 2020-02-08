@@ -22,9 +22,9 @@ def update_session_status(request):
     #     base64.b64decode(request.data["message"]["data"]).decode("utf-8")
     # )
     data = request.data.get("data")
-    session = get_object_or_404(Session, pk=data["session_id"])
+    session = get_object_or_404(Session, pk=data.get("session_id"))
     session_serializer = SessionSerializer(
-        session, data={"status": data["status"]}, partial=True
+        session, data={"status": data.get("status")}, partial=True
     )
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()
