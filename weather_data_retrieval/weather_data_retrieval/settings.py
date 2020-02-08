@@ -39,9 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'data_retrieval.apps.DataRetrievalConfig',
     "rest_framework",
-    "rest_framework_swagger",
-    "rest_framework.authtoken",
-    "django_extensions",
 ]
 
 MIDDLEWARE = [
@@ -58,10 +55,8 @@ ROOT_URLCONF = 'weather_data_retrieval.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2'
-        ,
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,17 +70,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'weather_data_retrieval.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 
 # Password validation
