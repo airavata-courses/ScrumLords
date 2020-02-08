@@ -5,9 +5,11 @@ import os
 from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
+from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
 from api_manager.apps import cities_coordinates
+from api_manager.models.city import City
 from api_manager.serializers import SessionSerializer
 
 
@@ -20,30 +22,20 @@ def start_session_pipeline(request):
     user_id = request.data.get("user_id")
     geo_id = request.data.get("city_id")
 
-    (
-        name,
-        alternate_names,
-        latitude,
-        longitude,
-        country_code,
-        admin_code,
-        population,
-        elevation,
-        timezone,
-    ) = cities_coordinates.get(geo_id)
+    city = get_object_or_404(City, pk=geo_id)
 
     session_serializer = SessionSerializer(
         data={
             "geo_id": geo_id,
-            "name": name,
-            "alternate_names": alternate_names,
-            "latitude": latitude,
-            "longitude": longitude,
-            "country_code": country_code,
-            "admin_code": admin_code,
-            "population": population,
-            "elevation": elevation,
-            "timezone": timezone,
+            "name": city.name,
+            "alternate_names": city.alternate_names,
+            "latitude": city.latitude,
+            "longitude": city.longitude,
+            "country_code": city.country_code,
+            "admin_code": city.admin_code_1,
+            "population": city.population,
+            "elevation": city.elevation,
+            "timezone": city.timezone,
             "status": "initialized",
             "user_id": user_id,
         }

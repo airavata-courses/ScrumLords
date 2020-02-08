@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api_manager.models import Session
+from api_manager.models.session import Session
 
 
 class SessionSerializer(serializers.ModelSerializer):

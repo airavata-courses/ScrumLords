@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api_manager.models import Session
+from api_manager.models.session import Session
 from api_manager.serializers import SessionSerializer
 
 
