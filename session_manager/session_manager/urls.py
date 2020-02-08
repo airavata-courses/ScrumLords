@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from manager.views.firestore_delete import delete_session
+from manager.views.firestore_save import save_session
 from manager.views.firestore_update import update_session
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(r"session/firestore", update_session)
+    path("admin/", admin.site.urls),
+    path(r"session/firestore/save", save_session),
+    path(r"session/firestore/update", update_session),
+    path(r"session/firestore/delete", delete_session),
 ]

@@ -14,7 +14,7 @@ class Firestore:
 
 
 class ManagerConfig(AppConfig):
-    name = 'manager'
+    name = "manager"
 
     def ready(self):
         global fs_client

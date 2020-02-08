@@ -7,7 +7,7 @@ from manager.exceptions import record_not_found_error
 from manager.utils import make_keys_to_dot
 
 
-@api_view(["GET"])
+@api_view(["POST"])
 def update_session(request):
     # data = json.loads(
     #     base64.b64decode(request.data["message"]["data"]).decode("utf-8")
