@@ -8,7 +8,6 @@ from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api_manager.apps import cities_coordinates
 from api_manager.models.city import City
 from api_manager.serializers import SessionSerializer
 
