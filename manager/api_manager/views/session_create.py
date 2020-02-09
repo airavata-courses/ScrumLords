@@ -44,7 +44,7 @@ def start_session_pipeline(request):
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()
 
-    # Publish onward to data_retrieval
+    # TODO Publish onward to data_retrieval, session_management
     # publish_event(
     #     data=session_serializer.data,
     #     project_id=PROJECT_ID,
