@@ -4,7 +4,6 @@
 .DS_Store
 .vscode
 *.prof
-templates
 *.pkl
 templates
 temp/
@@ -37,7 +36,6 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
 Pickle/
 
 # PyInstaller
