@@ -1,7 +1,11 @@
 package com.postprocessor.Postprocessormicroservice;
 
 import java.io.FileWriter;
+import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.google.api.core.ApiFuture;
 import com.google.api.core.ApiFutureCallback;
@@ -54,6 +59,9 @@ public class Postprocessor implements PostProcessService {
 	@Value("${spring.cloud.gcp.topic-id}")
 	private String topicid;
 	
+	@Value("${openweather.api.key}")
+	private String apikey;
+	
 	@Autowired
     public Postprocessor(HelloPubSubPublisher publisher) {
         this.publisher = publisher;
@@ -68,13 +76,127 @@ public class Postprocessor implements PostProcessService {
 			System.out.println("JSON OBJECT TEST");
 			
 			Map<String, Object> hourly = (Map<String, Object>) data.get("hourly");
+			Map<String, Object> currently = (Map<String, Object>) data.get("currently");
+			Map<String, Object> daily = (Map<String, Object>) data.get("daily");
+			ArrayList<String> alerts =  (ArrayList<String>) data.get("alerts");
+			
+			
+			System.out.println("Writing Summary for data!");
+			
+			//String data_str = data.toString();
+			
+			//String[] all_timestamps = StringUtils.substringsBetween(data_str, "time=", ",");
+			//String[] all_summary = StringUtils.substringsBetween(data_str, "summary=", "");
+			
+			//Double lat = Double.parseDouble(data.get("latitude").toString());
+			//Double lon = Double.parseDouble(data.get("longitude").toString());
+			
+			//int lat = Integer.parseInt(data.get("latitude").toString());
+			//int lon = Integer.parseInt(data.get("longitude").toString());
+			
+			//int lat = 2;
+			//int lon = 2;
+			/*
+			final String url = "https://tile.openweathermap.org/map/precipitation_new/2/"+lat+"/"+lon+".png?appid="+apikey;
+			
+			final String url2 = "https://tilecache.rainviewer.com/v2/radar/1581213000/512/2/"+lat+"/"+lon+"/1/0_0.png";
+			
+			final String url3 = "https://tilecache.rainviewer.com/v2/composite/1581220800/8192/0/0_1.png";
+			
+			System.out.println(url3);
+			System.out.println("Weather api call start.");
+			
+			
+			try(InputStream in = new URL(url3).openStream()){
+			    Files.copy(in, Paths.get("image.png"));
+			}
+			
+			
+			*/
+			
+			/*
+			RestTemplate restTemplate = new RestTemplate();
+			byte[] result = restTemplate.getForObject(url3, byte[].class);
+			Files.write(Paths.get("image.png"), result);
+			*/
+			
+			//System.out.println("Weather api call end.");
+			//System.out.println(result);
+			
+			
+			
+			
+			//System.out.println(hourly_data);
 			
 			String hourly_data = hourly.get("data").toString();
+			String[] time_hourly = StringUtils.substringsBetween(hourly_data, "time=", ",");
+			String[] summary_hourly = StringUtils.substringsBetween(hourly_data, "summary=", ",");
 			
-			System.out.println(hourly_data);
+			String currently_data = currently.toString();
+			String[] time_currently = StringUtils.substringsBetween(currently_data, "time=", ",");
+			String[] summary_currently = StringUtils.substringsBetween(currently_data, "summary=", ",");
 			
-			String[] hourly_temps = StringUtils.substringsBetween(hourly_data, "temperature=", ",");
+			String daily_data = daily.get("data").toString();
+			String[] time_daily = StringUtils.substringsBetween(daily_data, "time=", ",");
+			String[] summary_daily = StringUtils.substringsBetween(daily_data, "summary=", ",");
 			
+			String alerts_data = alerts.toString();
+			String[] alerts_title = StringUtils.substringsBetween(alerts_data, "title=", ",");
+			String[] alerts_regions = StringUtils.substringsBetween(alerts_data, "regions=", "],");
+			String[] alerts_severity = StringUtils.substringsBetween(alerts_data, "severity=", ",");
+			String[] alerts_desc = StringUtils.substringsBetween(alerts_data, "description=", ", uri=");
+			
+			System.out.println(alerts_data);
+			
+			String summary_string = "-----SUMMARY AFTER DATA ANALYSIS----- \n \n \n";
+			
+			summary_string = summary_string + "CURRENT DAY SUMMARY:-> \n \n";
+			
+			if (time_currently != null && summary_currently != null) {
+				for (int i = 0; i < time_currently.length; i++) {
+					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_currently[i])*1000);
+					String time_str = time.toString();
+					summary_string = summary_string + time_str + " : " + summary_currently[i] + "\n"; 
+				}
+			}
+			
+			summary_string = summary_string + "\nHOURLY SUMMARY:-> \n \n";
+			
+			if (time_hourly != null && summary_hourly != null) {
+				for (int i = 0; i < time_hourly.length; i++) {
+					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_hourly[i])*1000);
+					String time_str = time.toString();
+					summary_string = summary_string + time_str + " : " + summary_hourly[i] + "\n"; 
+				}
+			}
+			
+			summary_string = summary_string + "\nDAILY SUMMARY:-> \n \n";
+			
+			if (time_daily != null && summary_daily != null) {
+				for (int i = 0; i < time_daily.length; i++) {
+					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_daily[i])*1000);
+					String time_str = time.toString();
+					summary_string = summary_string + time_str + " : " + summary_daily[i] + "\n"; 
+				}
+			}
+			
+			summary_string = summary_string + "\nALERTS SUMMARY:-> \n \n";
+			
+			if (alerts_title != null && alerts_regions != null && alerts_severity != null && alerts_desc != null) {
+				for (int i = 0; i < alerts_title.length; i++) {
+					summary_string = summary_string + alerts_title[i] + "\nSeverity:  " + alerts_severity[i] + "\nRegions affected: " + alerts_regions[i] + "\nDescription: " + alerts_desc[i] + "\n"; 
+				}
+			}
+			
+			summary_string = summary_string + "\n \n ---END OF SUMMARY---";
+			
+			System.out.println("Writing summary to file");
+			FileWriter file = new FileWriter("data_files/summary.txt");
+			file.write(summary_string);
+			file.close();
+			System.out.println("Summary File write completed");
+			
+			/*
 			ArrayList<Double> int_temp = new ArrayList<Double>();
 			
 			if (hourly_temps != null) {
@@ -98,6 +220,7 @@ public class Postprocessor implements PostProcessService {
 			
 			System.out.println("Creating plot!!!");
 			
+			*/
 			
 			System.out.println("Sleep state!");
 			Thread.sleep(5 * 1000);
@@ -112,9 +235,9 @@ public class Postprocessor implements PostProcessService {
 			System.out.println(gsonString);
 			
 			System.out.println("Writing to file");
-			FileWriter file = new FileWriter("data.json");
-			file.write(gsonString);
-			file.close();
+			FileWriter file1 = new FileWriter("data.json");
+			file1.write(gsonString);
+			file1.close();
 			System.out.println("File write completed");
 			
 			System.out.println("Sending message to pubsub");
