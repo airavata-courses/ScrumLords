@@ -31,7 +31,10 @@ def retrieve_historical_data(request):
     for days in reversed(range(1, n_days_before + 1)):
         previous_datetime = current_datetime - timedelta(days=days)
         url = "https://api.darksky.net/forecast/{0}/{1},{2},{3}?exclude=currently,flags".format(
-            api_key, latitude, longitude, str(previous_datetime.timestamp()).split(".")[0]
+            api_key,
+            latitude,
+            longitude,
+            str(previous_datetime.timestamp()).split(".")[0],
         )
         dark_sky_api_response = requests.get(url=url)
         weather_history[days] = dark_sky_api_response.json()

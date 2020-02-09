@@ -5,7 +5,7 @@ bind = "0.0.0.0:8200"
 accesslog = "-"
 
 if os.environ["DJANGO_ENV"] == "development":
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'weather_data_retrieval.settings')
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "weather_data_retrieval.settings")
 else:
     pass
 

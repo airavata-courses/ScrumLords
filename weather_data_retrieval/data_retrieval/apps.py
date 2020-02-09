@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DataRetrievalConfig(AppConfig):
-    name = 'data_retrieval'
+    name = "data_retrieval"

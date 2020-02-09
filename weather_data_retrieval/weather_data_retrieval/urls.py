@@ -19,6 +19,6 @@ from django.urls import path
 from data_retrieval.views.data_retrieve import retrieve_historical_data
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("dark/history", retrieve_historical_data)
+    path("admin/", admin.site.urls),
+    path("dark/history", retrieve_historical_data),
 ]
