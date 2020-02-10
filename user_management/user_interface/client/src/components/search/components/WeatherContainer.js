@@ -40,8 +40,8 @@ export const WeatherContainer = () => {
         fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${searchQuery},us&appid=${API_KEY}`)
             .then(res => res.json())
             .then(async data => {
-                const lat = data.coord.lat;
-                const lon = data.coord.lon;
+                const latitude = data.coord.lat;
+                const longitude = data.coord.lon;
                 const user = await axios.get('/api/auth');
                 const user_id = user.data._id
 
@@ -51,13 +51,14 @@ export const WeatherContainer = () => {
                     desc: data.weather[0].main,
                     city: data.name
                 })
+                console.log(data)
 
                 const config = {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 };
-                const body = JSON.stringify({ user_id, lat, lon });
+                const body = JSON.stringify({ data: { user_id, latitude, longitude } });
                 // for sending response 
                 const res = axios.post('http://localhost:8000/session/create', body, config);
                 console.log(body)
