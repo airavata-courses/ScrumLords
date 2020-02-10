@@ -41,9 +41,6 @@ import com.google.pubsub.v1.PubsubMessage;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-
-
-
 @Service
 public class Postprocessor implements PostProcessService {
 	
@@ -56,11 +53,14 @@ public class Postprocessor implements PostProcessService {
 	@Value("${spring.cloud.gcp.project-id}")
 	private String projectid;
 	
-	@Value("${spring.cloud.gcp.topic-id}")
-	private String topicid;
+	@Value("${spring.cloud.gcp.topic-id-session-manager}")
+	private String topicIdSessionManager;
 	
-	@Value("${openweather.api.key}")
-	private String apikey;
+	@Value("${spring.cloud.gcp.topic-id-api-manager}")
+	private String topicIdApiManager;
+	
+	@Value("${spring.cloud.gcp.topic-id-test}")
+	private String topicIdTest;
 	
 	@Autowired
     public Postprocessor(HelloPubSubPublisher publisher) {
@@ -73,60 +73,82 @@ public class Postprocessor implements PostProcessService {
 	public void getProcessedData(Map<String, Object> data) {
 		try {
 			
-			System.out.println("JSON OBJECT TEST");
+			System.out.println("Running job");
 			
-			Map<String, Object> hourly = (Map<String, Object>) data.get("hourly");
-			Map<String, Object> currently = (Map<String, Object>) data.get("currently");
-			Map<String, Object> daily = (Map<String, Object>) data.get("daily");
-			ArrayList<String> alerts =  (ArrayList<String>) data.get("alerts");
+			System.out.println(data);
 			
+			Map<String, Object> data_map = (Map<String, Object>) data.get("data");
+			
+			Object sessionid_object =  data_map.get("session_id");
+			
+			String sessionid = sessionid_object.toString();
+			
+			Map<String, Object> forecast = (Map<String, Object>) data_map.get("forecast");
+			
+			ArrayList<Map<String, Object>> forecasts = new ArrayList<Map<String,Object>>();
+			
+			int val = 1;
+			
+			while (true){
+				if (forecast.get(Integer.toString(val)) != null ) {
+					forecasts.add((Map<String, Object>)forecast.get(Integer.toString(val)));
+					val++;
+				}
+				else {
+					break;
+				}
+			}
 			
 			System.out.println("Writing Summary for data!");
 			
-			//String data_str = data.toString();
+			String summary_string = "-----SUMMARY AFTER DATA ANALYSIS----- \n \n \n";
 			
-			//String[] all_timestamps = StringUtils.substringsBetween(data_str, "time=", ",");
-			//String[] all_summary = StringUtils.substringsBetween(data_str, "summary=", "");
-			
-			//Double lat = Double.parseDouble(data.get("latitude").toString());
-			//Double lon = Double.parseDouble(data.get("longitude").toString());
-			
-			//int lat = Integer.parseInt(data.get("latitude").toString());
-			//int lon = Integer.parseInt(data.get("longitude").toString());
-			
-			//int lat = 2;
-			//int lon = 2;
-			/*
-			final String url = "https://tile.openweathermap.org/map/precipitation_new/2/"+lat+"/"+lon+".png?appid="+apikey;
-			
-			final String url2 = "https://tilecache.rainviewer.com/v2/radar/1581213000/512/2/"+lat+"/"+lon+"/1/0_0.png";
-			
-			final String url3 = "https://tilecache.rainviewer.com/v2/composite/1581220800/8192/0/0_1.png";
-			
-			System.out.println(url3);
-			System.out.println("Weather api call start.");
-			
-			
-			try(InputStream in = new URL(url3).openStream()){
-			    Files.copy(in, Paths.get("image.png"));
+			summary_string = summary_string + "FORECAST SUMMARY:->";
+			int val1 = 1;
+			for (Map<String, Object> current : forecasts) {
+				Map<String, Object> hourly_cur = (Map<String, Object>) current.get("hourly");
+				Map<String, Object> daily_cur = (Map<String, Object>) current.get("daily");
+				
+				String hourly_data = hourly_cur.get("data").toString();
+				String[] time_hourly = StringUtils.substringsBetween(hourly_data, "time=", ",");
+				String[] summary_hourly = StringUtils.substringsBetween(hourly_data, "summary=", ",");
+				
+				String daily_data = daily_cur.get("data").toString();
+				String[] time_daily = StringUtils.substringsBetween(daily_data, "time=", ",");
+				String[] summary_daily = StringUtils.substringsBetween(daily_data, "summary=", ",");
+				
+				summary_string = summary_string + "\n \nFORECAST DAY "+val1+" :-> \n \n";
+				
+				summary_string = summary_string + "HOURLY SUMMARY:-> \n \n";
+				
+				if (time_hourly != null && summary_hourly != null) {
+					for (int i = 0; i < time_hourly.length; i++) {
+						java.util.Date time = new java.util.Date((long)Integer.parseInt(time_hourly[i])*1000);
+						String time_str = time.toString();
+						summary_string = summary_string + time_str + " : " + summary_hourly[i] + "\n"; 
+					}
+				}
+				
+				summary_string = summary_string + "\nDAY SUMMARY:-> \n \n";
+				
+				if (time_daily != null && summary_daily != null) {
+					for (int i = 0; i < time_daily.length; i++) {
+						java.util.Date time = new java.util.Date((long)Integer.parseInt(time_daily[i])*1000);
+						String time_str = time.toString();
+						summary_string = summary_string + time_str + " : " + summary_daily[i] + "\n"; 
+					}
+				}
+				
+				val1++;
+				
 			}
 			
-			
-			*/
-			
-			/*
-			RestTemplate restTemplate = new RestTemplate();
-			byte[] result = restTemplate.getForObject(url3, byte[].class);
-			Files.write(Paths.get("image.png"), result);
-			*/
-			
-			//System.out.println("Weather api call end.");
-			//System.out.println(result);
-			
-			
-			
-			
-			//System.out.println(hourly_data);
+			// This is for forecast_today.
+			Map<String, Object> forecast_today = (Map<String, Object>) data_map.get("forecast_today");
+			Map<String, Object> hourly = (Map<String, Object>) forecast_today.get("hourly");
+			Map<String, Object> currently = (Map<String, Object>) forecast_today.get("currently");
+			Map<String, Object> daily = (Map<String, Object>) forecast_today.get("daily");
+			ArrayList<String> alerts =  (ArrayList<String>) forecast_today.get("alerts");
 			
 			String hourly_data = hourly.get("data").toString();
 			String[] time_hourly = StringUtils.substringsBetween(hourly_data, "time=", ",");
@@ -140,15 +162,18 @@ public class Postprocessor implements PostProcessService {
 			String[] time_daily = StringUtils.substringsBetween(daily_data, "time=", ",");
 			String[] summary_daily = StringUtils.substringsBetween(daily_data, "summary=", ",");
 			
-			String alerts_data = alerts.toString();
+			String alerts_data = "";
+			
+			if (alerts != null) {
+				alerts_data = alerts.toString();
+				
+			}
+			
 			String[] alerts_title = StringUtils.substringsBetween(alerts_data, "title=", ",");
 			String[] alerts_regions = StringUtils.substringsBetween(alerts_data, "regions=", "],");
 			String[] alerts_severity = StringUtils.substringsBetween(alerts_data, "severity=", ",");
 			String[] alerts_desc = StringUtils.substringsBetween(alerts_data, "description=", ", uri=");
 			
-			System.out.println(alerts_data);
-			
-			String summary_string = "-----SUMMARY AFTER DATA ANALYSIS----- \n \n \n";
 			
 			summary_string = summary_string + "CURRENT DAY SUMMARY:-> \n \n";
 			
@@ -190,62 +215,67 @@ public class Postprocessor implements PostProcessService {
 			
 			summary_string = summary_string + "\n \n ---END OF SUMMARY---";
 			
-			System.out.println("Writing summary to file");
-			FileWriter file = new FileWriter("data_files/summary.txt");
-			file.write(summary_string);
-			file.close();
-			System.out.println("Summary File write completed");
+			//System.out.println("Writing summary to file");
+			//FileWriter file = new FileWriter("data_files/summary.txt");
+			//file.write(summary_string);
+			//file.close();
+			//System.out.println("Summary File write completed");
 			
-			/*
-			ArrayList<Double> int_temp = new ArrayList<Double>();
+			//Creating pubsub responses.
 			
-			if (hourly_temps != null) {
-			for(String temp : hourly_temps) {
-				if (temp != null) {
-				int_temp.add(Double.parseDouble(temp));
-				}
-			}
-			}
+			System.out.println("Creating pubsub response messages.");
+			Map<String, Object> api_manager_message_for_pubsub = new HashMap<String, Object>();
+			Map<String, Object> session_manager_message_for_pubsub = new HashMap<String, Object>();
 			
-			ArrayList<Integer> int_time = new ArrayList<Integer>();
+			String status = "Postpressing complete";
 			
-			for (int i=0; i<=24; i++) {
-				int_time.add(i);
-			}
+			Map<String, Object> api_manager_data = new HashMap<String, Object>();
+			Map<String, Object> session_manager_data = new HashMap<String, Object>();
 			
-			System.out.println("PRINTING HOURLY DATA");
-			for (int i=0; i<=24; i++) {
-				System.out.println(int_temp.get(i) + "--- " + int_time.get(i));
-			}
+			api_manager_data.put("session_id", sessionid);
+			api_manager_data.put("status", status);
 			
-			System.out.println("Creating plot!!!");
+			api_manager_message_for_pubsub.put("data", api_manager_data);
 			
-			*/
+			session_manager_data.put("session_id", sessionid);
+			session_manager_data.put("status", status);
+			session_manager_data.put("processed_data", summary_string);
 			
-			System.out.println("Sleep state!");
-			Thread.sleep(5 * 1000);
-			System.out.println("Sleep state complete!");
-			System.out.println(data);
+			session_manager_message_for_pubsub.put("data", session_manager_data);
 			
-			System.out.println("Converting to json");
+			System.out.println(api_manager_message_for_pubsub);
+			System.out.println(session_manager_message_for_pubsub);
+			
+			
+			//System.out.println("Sleep state!");
+			//Thread.sleep(5 * 1000);
+			//System.out.println("Sleep state complete!");
+			//System.out.println(data);
+			
+			System.out.println("Converting pubsub responsesto json");
 			Gson gson = new Gson();
 			Type gsonType = new TypeToken<HashMap>(){}.getType();
 			
-			String gsonString = gson.toJson(data, gsonType);
-			System.out.println(gsonString);
+			String api_manager_message_gson = gson.toJson(api_manager_message_for_pubsub, gsonType);
+			String session_manager_message_gson = gson.toJson(session_manager_message_for_pubsub, gsonType);
 			
-			System.out.println("Writing to file");
-			FileWriter file1 = new FileWriter("data.json");
-			file1.write(gsonString);
-			file1.close();
-			System.out.println("File write completed");
+			System.out.println(api_manager_message_gson);
+			System.out.println(session_manager_message_gson);
 			
-			System.out.println("Sending message to pubsub");
+			//System.out.println("Writing to file");
+			//FileWriter file1 = new FileWriter("data.json");
+			//file1.write(gsonString);
+			//file1.close();
+			//System.out.println("File write completed");
+			
+			System.out.println("Sending messages to pubsub");
+			
 			
 			String hostport = hostportvalue;
 			System.out.println("HOSTPORT: " + hostport);
 			ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
 			try {
+			
 			  TransportChannelProvider channelProvider =
 			      FixedTransportChannelProvider.create(GrpcTransportChannel.create(channel));
 			  CredentialsProvider credentialsProvider = NoCredentialsProvider.create();
@@ -259,48 +289,70 @@ public class Postprocessor implements PostProcessService {
 			              .setCredentialsProvider(credentialsProvider)
 			              .build());
 
-			  ProjectTopicName topicName = ProjectTopicName.of(projectid, topicid);
+			  ProjectTopicName topicNameForApiManager = ProjectTopicName.of(projectid, topicIdApiManager);
+			  ProjectTopicName topicNameForSessionManager = ProjectTopicName.of(projectid, topicIdSessionManager);
 			  // Set the channel and credentials provider when creating a `Publisher`.
 			  // Similarly for Subscriber
-			  Publisher publisher =
-			      Publisher.newBuilder(topicName)
+			  Publisher publisherForApiManager =
+			      Publisher.newBuilder(topicNameForApiManager)
 			          .setChannelProvider(channelProvider)
 			          .setCredentialsProvider(credentialsProvider)
 			          .build();
 			  
-			  String topic = publisher.getTopicNameString();
-			  System.out.println("TOPIC: " + topic);
+			  Publisher publisherForSessionManager =
+				      Publisher.newBuilder(topicNameForSessionManager)
+				          .setChannelProvider(channelProvider)
+				          .setCredentialsProvider(credentialsProvider)
+				          .build();
 			  
-			  //String message = "my_message";
-			  ByteString data1 = ByteString.copyFromUtf8(gsonString);
+			  String topic = publisherForApiManager.getTopicNameString();
+			  System.out.println("API TOPIC: " + topic);
+			  
+			  String topic2 = publisherForSessionManager.getTopicNameString();
+			  System.out.println("Session TOPIC: " + topic2);
+			  
+			  ByteString data1 = ByteString.copyFromUtf8(api_manager_message_gson);
 			  PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data1).build();
-			  ApiFuture<String> messageIdFuture = publisher.publish(pubsubMessage);
-			  
-			  
+			  ApiFuture<String> messageIdFuture = publisherForApiManager.publish(pubsubMessage);
 			  
 			  ApiFutures.addCallback(messageIdFuture, new ApiFutureCallback<String>() {
 				   public void onSuccess(String messageId) {
-				     System.out.println("published with message id: " + messageId);
+				     System.out.println("published to API Manager with message id: " + messageId);
 				   }
 
 				   public void onFailure(Throwable t) {
-				     System.out.println("failed to publish: " + t);
+				     System.out.println("failed to publish to API manager: " + t);
+				   }
+				 }, MoreExecutors.directExecutor());
+			  
+			  ByteString data2 = ByteString.copyFromUtf8(session_manager_message_gson);
+			  PubsubMessage pubsubMessage2 = PubsubMessage.newBuilder().setData(data2).build();
+			  ApiFuture<String> messageIdFuture2 = publisherForSessionManager.publish(pubsubMessage2);
+			  
+			  ApiFutures.addCallback(messageIdFuture2, new ApiFutureCallback<String>() {
+				   public void onSuccess(String messageId) {
+				     System.out.println("published to Session Manager with message id: " + messageId);
+				   }
+
+				   public void onFailure(Throwable t) {
+				     System.out.println("failed to publish to Session Manager: " + t);
 				   }
 				 }, MoreExecutors.directExecutor());
 			  
 			} finally {
 			  //channel.shutdown();
 			}
-			System.out.println("Message sent to pubsub");
+			
+			System.out.println("Post processing complete!");
 		}
 		catch (Exception e) {
-			System.out.println("Error in getProcessedData.");
+			System.out.println("Error in data post-processing.");
 			e.printStackTrace();
 		}
 	}
 
 	private Publisher getPublisher() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

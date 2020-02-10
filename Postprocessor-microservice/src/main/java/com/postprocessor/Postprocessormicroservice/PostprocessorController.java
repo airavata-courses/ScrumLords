@@ -27,7 +27,7 @@ public class PostprocessorController {
 	private PostProcessService postprocessService;
 	
 	
-	@RequestMapping(value = "/postprocess", method = RequestMethod.POST)
+	@RequestMapping(value = "/process/analyze", method = RequestMethod.POST)
 	public ResponseEntity<?> postprocess(@RequestBody Map<String, Object> data) {
 		
 		postprocessService.getProcessedData(data);
