@@ -47,7 +47,10 @@ def forecast_weather(request):
 
     forecast_today = requests.get(
         url=get_url(api_key=api_key, latitude=latitude, longitude=longitude)
-    )
+    ).json()
+
+    # Delete problematic and irrelevant firestore field
+    del forecast_today["flags"]
 
     for days in range(1, n_days_after + 1):
         future_datetime = current_datetime + timedelta(days=days)
@@ -64,7 +67,7 @@ def forecast_weather(request):
     response = {
         "n_days_after": n_days_after,
         "forecast": weather_forecast,
-        "forecast_today": forecast_today.json(),
+        "forecast_today": forecast_today,
         "session_id": data.get("session_id"),
     }
 
@@ -90,7 +93,7 @@ def forecast_weather(request):
             "status": "model_executed",
             "session_id": data.get("session_id"),
             "forecast": weather_forecast,
-            "forecast_today": forecast_today.json(),
+            "forecast_today": forecast_today,
         },
         project_id=PROJECT_ID,
         topic_name=UPDATE_SESSION,

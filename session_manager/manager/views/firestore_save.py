@@ -14,6 +14,6 @@ def save_session(request):
         base64.b64decode(request.data["message"]["data"]).decode("utf-8")
     )
     # data = request.data.get("data")
-    doc_ref = fs_client.collection("sessions").document(data.get("id"))
+    doc_ref = fs_client.collection("sessions").document(str(data.get("id")))
     doc_ref.set(data)
     return Response(status=status.HTTP_200_OK)

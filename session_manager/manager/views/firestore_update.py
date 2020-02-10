@@ -16,7 +16,7 @@ def update_session(request):
         base64.b64decode(request.data["message"]["data"]).decode("utf-8")
     )
     # data = request.data.get("data")
-    doc_ref = fs_client.collection("sessions").document(data.pop("session_id"))
+    doc_ref = fs_client.collection("sessions").document(str(data.pop("session_id")))
     try:
         doc_ref.update(make_keys_to_dot(data))
         return Response(status=status.HTTP_200_OK)
