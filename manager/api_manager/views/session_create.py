@@ -50,16 +50,20 @@ def start_session_pipeline(request):
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()
 
+    print(
+        session_serializer.data["n_days_before"],
+        session_serializer.data["n_days_after"],
+        "\n\n",
+    )
+
     # Publish to data_retrieval topic
     publish_event(
         data={
-            "data": {
-                "session_id": session_serializer.data["id"],
-                "n_days_before": session_serializer.data["n_days_before"],
-                "n_days_after": session_serializer.data["n_days_after"],
-                "latitude": city.latitude,
-                "longitude": city.longitude,
-            }
+            "session_id": session_serializer.data["id"],
+            "n_days_before": session_serializer.data["n_days_before"],
+            "n_days_after": session_serializer.data["n_days_after"],
+            "latitude": city.latitude,
+            "longitude": city.longitude,
         },
         project_id=PROJECT_ID,
         topic_name=DATA_RETRIEVAL,
@@ -67,9 +71,7 @@ def start_session_pipeline(request):
 
     # Publish to save_session topic
     publish_event(
-        data={"data": session_serializer.data},
-        project_id=PROJECT_ID,
-        topic_name=SAVE_SESSION,
+        data=session_serializer.data, project_id=PROJECT_ID, topic_name=SAVE_SESSION
     )
 
     return Response({"data": session_serializer.data}, status=status.HTTP_200_OK)

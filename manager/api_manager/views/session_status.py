@@ -16,15 +16,15 @@ def get_session_status(request, session_id):
     return Response({"data": {"status": session.status}}, status=status.HTTP_200_OK)
 
 
-@api_view(["PUT"])
+@api_view(["POST"])
 def update_session_status(request):
-    # data = json.loads(
-    #     base64.b64decode(request.data["message"]["data"]).decode("utf-8")
-    # )
-    data = request.data.get("data")
-    session = get_object_or_404(Session, pk=data.get("session_id"))
+    data = json.loads(
+        base64.b64decode(request.data["message"]["data"]).decode("utf-8")
+    )
+    # data = request.data.get("data")
+    session = get_object_or_404(Session, pk=data.pop("session_id"))
     session_serializer = SessionSerializer(
-        session, data={"status": data.get("status")}, partial=True
+        session, data={"status": data.pop("status")}, partial=True
     )
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()

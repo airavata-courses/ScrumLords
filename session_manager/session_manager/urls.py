@@ -22,7 +22,7 @@ from manager.views.firestore_update import update_session
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path(r"session/firestore/save", save_session),
-    path(r"session/firestore/update", update_session),
-    path(r"session/firestore/delete", delete_session),
+    path(r"session/save", save_session),
+    path(r"session/update", update_session),
+    path(r"session/delete", delete_session),
 ]

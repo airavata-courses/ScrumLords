@@ -1,5 +1,8 @@
+import base64
+import json
 from collections import defaultdict
 
+from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
@@ -8,15 +11,18 @@ from datetime import datetime, timedelta
 
 from rest_framework.response import Response
 
+PROJECT_ID = os.environ["PUBSUB_PROJECT_ID"]
+MODEL_EXECUTE = os.environ["MODEL_EXECUTE_TOPIC"]
+UPDATE_STATUS = os.environ["UPDATE_STATUS_TOPIC"]
+UPDATE_SESSION = os.environ["UPDATE_SESSION_TOPIC"]
+
 
 @api_view(["POST"])
 def retrieve_historical_data(request):
-    # data = json.loads(
-    #     base64.b64decode(request.data["message"]["data"]).decode("utf-8")
-    # )
-
     # data has session_id, latitude, longitude, n_days_before and n_days_after
-    data = request.data.get("data")
+    data = json.loads(base64.b64decode(request.data["message"]["data"]).decode("utf-8"))
+
+    # data = request.data.get("data")
     latitude, longitude, n_days_before, n_days_after, api_key = (
         data.get("latitude"),
         data.get("longitude"),
@@ -24,6 +30,8 @@ def retrieve_historical_data(request):
         data.get("n_days_after"),
         os.environ["DARK_SKY_API_KEY"],
     )
+
+    print(n_days_before, n_days_after)
 
     current_datetime = datetime.now()
     weather_history = defaultdict(dict)
@@ -40,7 +48,6 @@ def retrieve_historical_data(request):
         weather_history[days] = dark_sky_api_response.json()
 
     response = {
-        "n_days_before": n_days_before,
         "n_days_after": n_days_after,
         "data_retrieved": weather_history,
         "latitude": latitude,
@@ -48,6 +55,32 @@ def retrieve_historical_data(request):
         "session_id": data.get("session_id"),
     }
 
-    # TODO publish to both api_manager, session_manager and model_execution
+    # Publish to model_execute topic
+    publish_event(
+        data={
+            key: response[key]
+            for key in ["n_days_after", "latitude", "longitude", "session_id"]
+        },
+        project_id=PROJECT_ID,
+        topic_name=MODEL_EXECUTE,
+    )
 
-    return Response({"data": response}, status=status.HTTP_200_OK)
+    # Publish to update_status topic
+    publish_event(
+        data={"status": "retrieved", "session_id": data.get("session_id")},
+        project_id=PROJECT_ID,
+        topic_name=UPDATE_STATUS,
+    )
+
+    # Publish to update_session topic
+    publish_event(
+        data={
+            "status": "retrieved",
+            "session_id": data.get("session_id"),
+            "data_retrieved": response["data_retrieved"],
+        },
+        project_id=PROJECT_ID,
+        topic_name=UPDATE_SESSION,
+    )
+
+    return Response(status=status.HTTP_200_OK)

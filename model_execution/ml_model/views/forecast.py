@@ -1,5 +1,8 @@
+import base64
+import json
 from collections import defaultdict
 
+from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
@@ -7,6 +10,12 @@ import os
 from datetime import datetime, timedelta
 
 from rest_framework.response import Response
+
+
+PROJECT_ID = os.environ["PUBSUB_PROJECT_ID"]
+POST_PROCESS = os.environ["POST_PROCESS_TOPIC"]
+UPDATE_STATUS = os.environ["UPDATE_STATUS_TOPIC"]
+UPDATE_SESSION = os.environ["UPDATE_SESSION_TOPIC"]
 
 
 def get_url(api_key: str, latitude: str, longitude: str, date: datetime = None) -> str:
@@ -21,17 +30,14 @@ def get_url(api_key: str, latitude: str, longitude: str, date: datetime = None) 
 
 @api_view(["POST"])
 def forecast_weather(request):
-    # data = json.loads(
-    #     base64.b64decode(request.data["message"]["data"]).decode("utf-8")
-    # )
+    # data has session_id, latitude, longitude and n_days_after
+    data = json.loads(base64.b64decode(request.data["message"]["data"]).decode("utf-8"))
 
-    # data has session_id, latitude, longitude, n_days_before and n_days_after
-    data = request.data.get("data")
+    # data = request.data.get("data")
 
-    latitude, longitude, n_days_before, n_days_after, api_key = (
+    latitude, longitude, n_days_after, api_key = (
         data.get("latitude"),
         data.get("longitude"),
-        data.get("n_days_before"),
         data.get("n_days_after"),
         os.environ["DARK_SKY_API_KEY"],
     )
@@ -43,7 +49,7 @@ def forecast_weather(request):
         url=get_url(api_key=api_key, latitude=latitude, longitude=longitude)
     )
 
-    for days in range(1, n_days_before + 1):
+    for days in range(1, n_days_after + 1):
         future_datetime = current_datetime + timedelta(days=days)
         dark_sky_api_response = requests.get(
             url=get_url(
@@ -59,11 +65,35 @@ def forecast_weather(request):
         "n_days_after": n_days_after,
         "forecast": weather_forecast,
         "forecast_today": forecast_today.json(),
-        "latitude": latitude,
-        "longitude": longitude,
         "session_id": data.get("session_id"),
     }
 
-    # TODO publish to both api_manager, session_manager and post_processing
+    # # Publish to post_process topic
+    # publish_event(
+    #     data={
+    #         key: response[key] for key in ["forecast", "forecast_today", "session_id"]
+    #     },
+    #     project_id=PROJECT_ID,
+    #     topic_name=POST_PROCESS,
+    # )
+
+    # Publish to update_status topic
+    publish_event(
+        data={"status": "model_executed", "session_id": data.get("session_id")},
+        project_id=PROJECT_ID,
+        topic_name=UPDATE_STATUS,
+    )
+
+    # Publish to update_session topic
+    publish_event(
+        data={
+            "status": "model_executed",
+            "session_id": data.get("session_id"),
+            "forecast": weather_forecast,
+            "forecast_today": forecast_today.json(),
+        },
+        project_id=PROJECT_ID,
+        topic_name=UPDATE_SESSION,
+    )
 
     return Response({"data": response}, status=status.HTTP_200_OK)
