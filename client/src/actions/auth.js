@@ -11,7 +11,6 @@ export const loadUser = () => async dispatch => {
 
     try {
         const res = await axios.get('/api/auth');
-
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -78,7 +77,6 @@ export const login = (email, password) => async dispatch => {
             // we get token back on success
             payload: res.data
         });
-
         dispatch(loadUser());
 
     } catch (err) {

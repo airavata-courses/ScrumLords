@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import WeatherInfo from './WeatherInfo';
+import axios from 'axios'
 
 export const WeatherContainer = () => {
     const API_KEY = '4c3f87318d7dda9dbf7b495c8c670333'
@@ -38,12 +39,29 @@ export const WeatherContainer = () => {
 
         fetch(`http://api.openweathermap.org/data/2.5/weather?zip=${searchQuery},us&appid=${API_KEY}`)
             .then(res => res.json())
-            .then(data => setWeatherData({
-                temp: data.main.temp,
-                humidity: data.main.humidity,
-                desc: data.weather[0].main,
-                city: data.name
-            }))
+            .then(async data => {
+                const lat = data.coord.lat;
+                const lon = data.coord.lon;
+                const user = await axios.get('/api/auth');
+                const user_id = user.data._id
+
+                setWeatherData({
+                    temp: data.main.temp,
+                    humidity: data.main.humidity,
+                    desc: data.weather[0].main,
+                    city: data.name
+                })
+
+                const config = {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                };
+                const body = JSON.stringify({ user_id, lat, lon });
+                // for sending response 
+                const res = axios.post('http://localhost:8000/session/create', body, config);
+                console.log(body)
+            })
     }
 
     return (
@@ -64,6 +82,7 @@ export const WeatherContainer = () => {
             </section>
         </section>
     )
+
 }
 
 export default WeatherContainer
