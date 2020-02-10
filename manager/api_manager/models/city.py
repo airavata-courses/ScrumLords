@@ -1,7 +1,8 @@
 from django.db import models
+from model_utils.models import TimeStampedModel, SoftDeletableModel
 
 
-class City(models.Model):
+class City(TimeStampedModel, SoftDeletableModel):
     name = models.CharField(max_length=200, null=False)
     ascii_name = models.CharField(max_length=200, null=True)
     alternate_names = models.CharField(max_length=5000, null=True)

@@ -18,6 +18,8 @@ class Session(TimeStampedModel, SoftDeletableModel):
     elevation = models.CharField(max_length=100, null=True)
     timezone = models.CharField(max_length=100, null=False)
     status = models.CharField(max_length=30, null=False)
+    n_days_before = models.IntegerField(default=5, null=False)
+    n_days_after = models.IntegerField(default=7, null=False)
     user_id = models.IntegerField(null=False)
 
     class Meta:

@@ -10,88 +10,38 @@ project_id = os.getenv("PUBSUB_PROJECT_ID", "falana-dhimka")
 
 pubsub_config = {
     "weather_forecast": {
-        "test_pubsub": {
-            "subscription_name": "test_subscription",
-            "endpoint": os.environ["TEST_ENDPOINT"],
+        "data_retrieval": {
+            "subscription_name": "data_retrieval_sub",
+            "endpoint": os.environ["DATA_RETRIEVAL_ENDPOINT"],
         },
-        "master_document": {
-            "subscription_name": "create_master_document_sub",
-            "endpoint": os.environ["CREATE_MASTER_DOC_ENDPOINT"],
+        "save_session": {
+            "subscription_name": "session_save_sub",
+            "endpoint": os.environ["SAVE_SESSION_ENDPOINT"],
         },
-        "enhancement": {
-            "subscription_name": "perform_enhancement_sub",
-            "endpoint": os.environ["PERFORM_ENHANCEMENT_ENDPOINT"],
+        "model_execute": {
+            "subscription_name": "model_execute_sub",
+            "endpoint": os.environ["MODEL_EXECUTE_ENDPOINT"],
         },
-        "conversion": {
-            "subscription_name": "perform_conversion_sub",
-            "endpoint": os.environ["PERFORM_CONVERSION_ENDPOINT"],
+        "update_status": {
+            "subscription_name": "update_status_sub",
+            "endpoint": os.environ["UPDATE_STATUS_ENDPOINT"],
         },
-        "upload": {
-            "subscription_name": "upload_doc_sub",
-            "endpoint": os.environ["UPLOAD_DOCUMENT_ENDPOINT"],
+        "update_session": {
+            "subscription_name": "update_session_sub",
+            "endpoint": os.environ["UPDATE_SESSION_ENDPOINT"],
         },
-        "combine_document": {
-            "subscription_name": "combine_document_sub",
-            "endpoint": os.environ["COMBINE_DOCUMENT_ENDPOINT"],
-        },
-        "text_recognition": {
-            "subscription_name": "text_recognition_sub",
-            "endpoint": os.environ["OCR_ENDPOINT"],
-        },
-        "send_error": {
-            "subscription_name": "error_handler",
-            "endpoint": os.environ["ERROR_HANDLER_ENDPOINT"],
-        },
-        "job_error": {
-            "subscription_name": "job_error_handler",
-            "endpoint": os.environ["JOB_ERROR_ENDPOINT"],
-        },
-        "identification": {
-            "subscription_name": "identification_sub",
-            "endpoint": os.environ["IDENTIFICATION_ENDPOINT"],
-        },
-        "create_child_doc": {
-            "subscription_name": "create_child_doc_sub",
-            "endpoint": os.environ["CREATE_CHILD_DOC_ENDPOINT"],
-        },
-        "singular_field_prediction": {
-            "subscription_name": "singular_field_prediction_sub",
-            "endpoint": os.environ["SINGULAR_FIELD_PREDICTION_ENDPOINT"],
-        },
-        "tabular_field_prediction": {
-            "subscription_name": "tabular_field_prediction_sub",
-            "endpoint": os.environ["TABULAR_FIELD_PREDICTION_ENDPOINT"],
-        },
-        "singular_field_standardisation": {
-            "subscription_name": "singular_field_standardisation_sub",
-            "endpoint": os.environ["SINGULAR_FIELD_STANDARDISATION_ENDPOINT"],
-        },
-        "tabular_field_standardisation": {
-            "subscription_name": "tabular_field_standardisation_sub",
-            "endpoint": os.environ["TABULAR_FIELD_STANDARDISATION_ENDPOINT"],
-        },
-        "rule_update": {
-            "subscription_name": "rule_update_sub",
-            "endpoint": os.environ["RULE_UPDATION_ENDPOINT"],
+        "post_process": {
+            "subscription_name": "post_process_sub",
+            "endpoint": os.environ["POST_PROCESS_ENDPOINT"],
         },
     },
     "subscription_names": [
-        "test_subscription",
-        "create_master_document_sub",
-        "perform_enhancement_sub",
-        "perform_conversion_sub",
-        "upload_doc_sub",
-        "combine_document_sub",
-        "text_recognition_sub",
-        "error_handler_sub",
-        "job_error_handler_sub",
-        "identification_sub",
-        "create_child_doc_sub",
-        "singular_field_prediction_sub",
-        "tabular_field_prediction_sub",
-        "singular_field_standardisation_sub",
-        "tabular_field_standardisation_sub",
-        "rule_update_sub",
+        "data_retrieval_sub",
+        "save_session_sub",
+        "model_execute_sub",
+        "update_status_sub",
+        "update_session_sub",
+        "post_process_sub",
     ],
 }
 

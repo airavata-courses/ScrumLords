@@ -4,7 +4,7 @@ import sys
 import google
 from google.cloud import pubsub_v1
 
-from create_topics import get_pubsub_config
+from topics import get_pubsub_config
 
 subscriber = pubsub_v1.SubscriberClient()
 project_id = os.getenv("PUBSUB_PROJECT_ID", "falana-dhimka")
