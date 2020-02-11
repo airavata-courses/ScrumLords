@@ -3,6 +3,8 @@ package com.postprocessor.Postprocessormicroservice;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +16,7 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -77,6 +80,16 @@ public class Postprocessor implements PostProcessService {
 			
 			System.out.println(data);
 			
+			
+			
+			//System.out.println("Sleep state!");
+			//Thread.sleep(30 * 1000);
+			//System.out.println("Sleep state complete!");
+			//System.out.println(data);
+			
+			
+			//System.out.println(data);
+			
 			Map<String, Object> data_map = (Map<String, Object>) data.get("data");
 			
 			Object sessionid_object =  data_map.get("session_id");
@@ -123,7 +136,9 @@ public class Postprocessor implements PostProcessService {
 				
 				if (time_hourly != null && summary_hourly != null) {
 					for (int i = 0; i < time_hourly.length; i++) {
-						java.util.Date time = new java.util.Date((long)Integer.parseInt(time_hourly[i])*1000);
+						BigInteger bd = new BigDecimal(time_hourly[i]).toBigInteger();
+						int date_val = bd.intValue();
+						java.util.Date time = new java.util.Date((long)date_val*1000);
 						String time_str = time.toString();
 						summary_string = summary_string + time_str + " : " + summary_hourly[i] + "\n"; 
 					}
@@ -133,7 +148,9 @@ public class Postprocessor implements PostProcessService {
 				
 				if (time_daily != null && summary_daily != null) {
 					for (int i = 0; i < time_daily.length; i++) {
-						java.util.Date time = new java.util.Date((long)Integer.parseInt(time_daily[i])*1000);
+						BigInteger bd = new BigDecimal(time_daily[i]).toBigInteger();
+						int date_val = bd.intValue();
+						java.util.Date time = new java.util.Date((long)date_val*1000);
 						String time_str = time.toString();
 						summary_string = summary_string + time_str + " : " + summary_daily[i] + "\n"; 
 					}
@@ -179,7 +196,9 @@ public class Postprocessor implements PostProcessService {
 			
 			if (time_currently != null && summary_currently != null) {
 				for (int i = 0; i < time_currently.length; i++) {
-					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_currently[i])*1000);
+					BigInteger bd = new BigDecimal(time_currently[i]).toBigInteger();
+					int date_val = bd.intValue();
+					java.util.Date time = new java.util.Date((long)date_val*1000);
 					String time_str = time.toString();
 					summary_string = summary_string + time_str + " : " + summary_currently[i] + "\n"; 
 				}
@@ -189,7 +208,9 @@ public class Postprocessor implements PostProcessService {
 			
 			if (time_hourly != null && summary_hourly != null) {
 				for (int i = 0; i < time_hourly.length; i++) {
-					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_hourly[i])*1000);
+					BigInteger bd = new BigDecimal(time_hourly[i]).toBigInteger();
+					int date_val = bd.intValue();
+					java.util.Date time = new java.util.Date((long)date_val*1000);
 					String time_str = time.toString();
 					summary_string = summary_string + time_str + " : " + summary_hourly[i] + "\n"; 
 				}
@@ -199,7 +220,9 @@ public class Postprocessor implements PostProcessService {
 			
 			if (time_daily != null && summary_daily != null) {
 				for (int i = 0; i < time_daily.length; i++) {
-					java.util.Date time = new java.util.Date((long)Integer.parseInt(time_daily[i])*1000);
+					BigInteger bd = new BigDecimal(time_daily[i]).toBigInteger();
+					int date_val = bd.intValue();
+					java.util.Date time = new java.util.Date((long)date_val*1000);
 					String time_str = time.toString();
 					summary_string = summary_string + time_str + " : " + summary_daily[i] + "\n"; 
 				}
@@ -227,7 +250,7 @@ public class Postprocessor implements PostProcessService {
 			Map<String, Object> api_manager_message_for_pubsub = new HashMap<String, Object>();
 			Map<String, Object> session_manager_message_for_pubsub = new HashMap<String, Object>();
 			
-			String status = "Postpressing complete";
+			String status = "processed";
 			
 			Map<String, Object> api_manager_data = new HashMap<String, Object>();
 			Map<String, Object> session_manager_data = new HashMap<String, Object>();
