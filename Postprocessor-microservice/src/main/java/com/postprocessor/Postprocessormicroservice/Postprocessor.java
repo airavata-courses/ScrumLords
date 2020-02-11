@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
@@ -348,6 +349,8 @@ public class Postprocessor implements PostProcessService {
 				   }
 				 }, MoreExecutors.directExecutor());
 			  
+			  publisherForApiManager.shutdown();
+			  
 			  ByteString data2 = ByteString.copyFromUtf8(session_manager_message_gson);
 			  PubsubMessage pubsubMessage2 = PubsubMessage.newBuilder().setData(data2).build();
 			  ApiFuture<String> messageIdFuture2 = publisherForSessionManager.publish(pubsubMessage2);
@@ -361,9 +364,10 @@ public class Postprocessor implements PostProcessService {
 				     System.out.println("failed to publish to Session Manager: " + t);
 				   }
 				 }, MoreExecutors.directExecutor());
+			  publisherForSessionManager.shutdown();
 			  
 			} finally {
-			  channel.shutdown();
+			  //channel.shutdown();
 			}
 			
 			System.out.println("Post processing complete!");
