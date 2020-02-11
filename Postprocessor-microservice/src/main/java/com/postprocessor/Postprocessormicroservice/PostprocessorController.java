@@ -65,7 +65,7 @@ public class PostprocessorController {
 		postprocessService.getProcessedData(datadict);
 		
 		
-		return new ResponseEntity<>("Job Submitted", HttpStatus.ACCEPTED);
+		return new ResponseEntity<>("Job Submitted", HttpStatus.OK);
 	}
 
 }
