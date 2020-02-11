@@ -72,13 +72,13 @@ def forecast_weather(request):
     }
 
     # # Publish to post_process topic
-    # publish_event(
-    #     data={
-    #         key: response[key] for key in ["forecast", "forecast_today", "session_id"]
-    #     },
-    #     project_id=PROJECT_ID,
-    #     topic_name=POST_PROCESS,
-    # )
+    publish_event(
+        data={
+            key: response[key] for key in ["forecast", "forecast_today", "session_id"]
+        },
+        project_id=PROJECT_ID,
+        topic_name=POST_PROCESS,
+    )
 
     # Publish to update_status topic
     publish_event(
