@@ -250,7 +250,7 @@ public class Postprocessor implements PostProcessService {
 			Map<String, Object> api_manager_message_for_pubsub = new HashMap<String, Object>();
 			Map<String, Object> session_manager_message_for_pubsub = new HashMap<String, Object>();
 			
-			String status = "Postpressing complete";
+			String status = "processed";
 			
 			Map<String, Object> api_manager_data = new HashMap<String, Object>();
 			Map<String, Object> session_manager_data = new HashMap<String, Object>();
