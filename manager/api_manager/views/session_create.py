@@ -55,12 +55,6 @@ def start_session_pipeline(request):
     session_serializer.is_valid(raise_exception=True)
     session_serializer.save()
 
-    print(
-        session_serializer.data["n_days_before"],
-        session_serializer.data["n_days_after"],
-        "\n\n",
-    )
-
     # Publish to data_retrieval topic
     publish_event(
         data={
