@@ -61,7 +61,7 @@ public class PostprocessorController {
 		datadict.put("data", datamap);
 		
 		System.out.println("DATA DICT Created");
-		System.out.println(datadict);
+// 		System.out.println(datadict);
 		postprocessService.getProcessedData(datadict);
 		
 		

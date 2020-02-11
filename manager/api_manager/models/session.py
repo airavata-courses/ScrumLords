@@ -20,7 +20,7 @@ class Session(TimeStampedModel, SoftDeletableModel):
     status = models.CharField(max_length=30, null=False)
     n_days_before = models.IntegerField(default=5, null=False)
     n_days_after = models.IntegerField(default=7, null=False)
-    user_id = models.IntegerField(null=False)
+    user_id = models.CharField(max_length=50, null=False)
 
     class Meta:
         db_table = "sessions"

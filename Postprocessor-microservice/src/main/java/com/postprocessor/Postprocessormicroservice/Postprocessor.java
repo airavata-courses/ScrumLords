@@ -78,7 +78,7 @@ public class Postprocessor implements PostProcessService {
 			
 			System.out.println("Running job");
 			
-			System.out.println(data);
+			//System.out.println(data);
 			
 			
 			
@@ -266,8 +266,8 @@ public class Postprocessor implements PostProcessService {
 			
 			session_manager_message_for_pubsub.put("data", session_manager_data);
 			
-			System.out.println(api_manager_message_for_pubsub);
-			System.out.println(session_manager_message_for_pubsub);
+// 			System.out.println(api_manager_message_for_pubsub);
+// 			System.out.println(session_manager_message_for_pubsub);
 			
 			
 			//System.out.println("Sleep state!");
@@ -282,8 +282,8 @@ public class Postprocessor implements PostProcessService {
 			String api_manager_message_gson = gson.toJson(api_manager_message_for_pubsub, gsonType);
 			String session_manager_message_gson = gson.toJson(session_manager_message_for_pubsub, gsonType);
 			
-			System.out.println(api_manager_message_gson);
-			System.out.println(session_manager_message_gson);
+// 			System.out.println(api_manager_message_gson);
+// 			System.out.println(session_manager_message_gson);
 			
 			//System.out.println("Writing to file");
 			//FileWriter file1 = new FileWriter("data.json");
@@ -363,7 +363,7 @@ public class Postprocessor implements PostProcessService {
 				 }, MoreExecutors.directExecutor());
 			  
 			} finally {
-			  //channel.shutdown();
+			  channel.shutdown();
 			}
 			
 			System.out.println("Post processing complete!");

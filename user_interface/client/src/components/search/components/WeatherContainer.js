@@ -74,7 +74,7 @@ export const WeatherContainer = () => {
                         'Content-Type': 'application/json'
                     }
                 };
-                const body = JSON.stringify({ data: { user_id, city_id } });
+                const body = JSON.stringify({ user_id, city_id });
                 // for sending response 
                 const res = axios.post('http://localhost:8000/session/create', body, config);
                 console.log(body)

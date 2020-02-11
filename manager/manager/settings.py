@@ -25,7 +25,7 @@ SECRET_KEY = "mqz7gn+i1+kqcel7)++sj_6%__@-=4vvv=)esf=3k#@uynnl+2"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -39,10 +39,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "api_manager.apps.ApiManagerConfig",
     "rest_framework",
+    "corsheaders",
     "django_extensions",
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -70,6 +72,11 @@ TEMPLATES = [
     }
 ]
 
+CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     "EXCEPTION_HANDLER": "api_manager.exceptions.custom_exception_handler",
