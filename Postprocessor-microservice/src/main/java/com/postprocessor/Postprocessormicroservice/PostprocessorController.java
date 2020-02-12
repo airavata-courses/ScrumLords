@@ -39,20 +39,11 @@ public class PostprocessorController {
 	public ResponseEntity<?> postprocess(@RequestBody Map<String, Object> data) {
 		
 		Map<String, Object> dataObj = (Map<String, Object>) data.get("message");
-		System.out.println("TEST 1");
-		//System.out.println(dataObj);
 		
 		String dataObj2 =  dataObj.get("data").toString();
-		System.out.println("TEST 2");
-		//System.out.println(dataObj2);
 		
 		byte[] byteArrayData = Base64.decodeBase64(dataObj2.getBytes());
-		System.out.println("TEST 3");
-		//System.out.println(byteArrayData);
 		String decodedData = new String(byteArrayData);
-		System.out.println("TEST 4");
-		//System.out.println(decodedData);
-		
 	
 		HashMap<String,Object> datamap = new Gson().fromJson(decodedData, new TypeToken<HashMap<String, Object>>(){}.getType());
 		
@@ -60,10 +51,7 @@ public class PostprocessorController {
 		
 		datadict.put("data", datamap);
 		
-		System.out.println("DATA DICT Created");
-// 		System.out.println(datadict);
 		postprocessService.getProcessedData(datadict);
-		
 		
 		return new ResponseEntity<>("Job Submitted", HttpStatus.OK);
 	}

@@ -77,25 +77,15 @@ public class Postprocessor implements PostProcessService {
 	public void getProcessedData(Map<String, Object> data) {
 		try {
 			
-			System.out.println("Running job");
-			
-			//System.out.println(data);
-			
-			
-			
-			//System.out.println("Sleep state!");
-			//Thread.sleep(30 * 1000);
-			//System.out.println("Sleep state complete!");
-			//System.out.println(data);
-			
-			
-			//System.out.println(data);
-			
 			Map<String, Object> data_map = (Map<String, Object>) data.get("data");
 			
 			Object sessionid_object =  data_map.get("session_id");
 			
-			String sessionid = sessionid_object.toString();
+			String sessionid1 = sessionid_object.toString();
+			
+			double sessionid2 = Double.parseDouble(sessionid1);
+			
+			int sessionid = (int) sessionid2;
 			
 			Map<String, Object> forecast = (Map<String, Object>) data_map.get("forecast");
 			
@@ -112,8 +102,6 @@ public class Postprocessor implements PostProcessService {
 					break;
 				}
 			}
-			
-			System.out.println("Writing Summary for data!");
 			
 			String summary_string = "-----SUMMARY AFTER DATA ANALYSIS----- \n \n \n";
 			
@@ -239,64 +227,29 @@ public class Postprocessor implements PostProcessService {
 			
 			summary_string = summary_string + "\n \n ---END OF SUMMARY---";
 			
-			//System.out.println("Writing summary to file");
-			//FileWriter file = new FileWriter("data_files/summary.txt");
-			//file.write(summary_string);
-			//file.close();
-			//System.out.println("Summary File write completed");
-			
 			//Creating pubsub responses.
 			
-			System.out.println("Creating pubsub response messages.");
 			Map<String, Object> api_manager_message_for_pubsub = new HashMap<String, Object>();
 			Map<String, Object> session_manager_message_for_pubsub = new HashMap<String, Object>();
 			
 			String status = "processed";
 			
-			//Map<String, Object> api_manager_data = new HashMap<String, Object>();
-			//Map<String, Object> session_manager_data = new HashMap<String, Object>();
-			
 			api_manager_message_for_pubsub.put("session_id", sessionid);
 			api_manager_message_for_pubsub.put("status", status);
-			
-			//api_manager_message_for_pubsub.put("data", api_manager_data);
-			
+						
 			session_manager_message_for_pubsub.put("session_id", sessionid);
 			session_manager_message_for_pubsub.put("status", status);
 			session_manager_message_for_pubsub.put("processed_data", summary_string);
 			
-			//session_manager_message_for_pubsub.put("data", session_manager_data);
-			
-// 			System.out.println(api_manager_message_for_pubsub);
-// 			System.out.println(session_manager_message_for_pubsub);
-			
-			
-			//System.out.println("Sleep state!");
-			//Thread.sleep(5 * 1000);
-			//System.out.println("Sleep state complete!");
-			//System.out.println(data);
-			
-			System.out.println("Converting pubsub responsesto json");
 			Gson gson = new Gson();
 			Type gsonType = new TypeToken<HashMap>(){}.getType();
 			
 			String api_manager_message_gson = gson.toJson(api_manager_message_for_pubsub, gsonType);
 			String session_manager_message_gson = gson.toJson(session_manager_message_for_pubsub, gsonType);
 			
-// 			System.out.println(api_manager_message_gson);
-// 			System.out.println(session_manager_message_gson);
-			
-			//System.out.println("Writing to file");
-			//FileWriter file1 = new FileWriter("data.json");
-			//file1.write(gsonString);
-			//file1.close();
-			//System.out.println("File write completed");
-			
 			System.out.println("Sending messages to pubsub");
 			
-			
 			String hostport = hostportvalue;
-			System.out.println("HOSTPORT: " + hostport);
 			ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
 			try {
 			
@@ -330,10 +283,8 @@ public class Postprocessor implements PostProcessService {
 				          .build();
 			  
 			  String topic = publisherForApiManager.getTopicNameString();
-			  System.out.println("API TOPIC: " + topic);
 			  
 			  String topic2 = publisherForSessionManager.getTopicNameString();
-			  System.out.println("Session TOPIC: " + topic2);
 			  
 			  ByteString data1 = ByteString.copyFromUtf8(api_manager_message_gson);
 			  PubsubMessage pubsubMessage = PubsubMessage.newBuilder().setData(data1).build();
