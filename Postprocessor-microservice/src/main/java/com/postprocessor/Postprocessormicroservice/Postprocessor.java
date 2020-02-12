@@ -253,19 +253,19 @@ public class Postprocessor implements PostProcessService {
 			
 			String status = "processed";
 			
-			Map<String, Object> api_manager_data = new HashMap<String, Object>();
-			Map<String, Object> session_manager_data = new HashMap<String, Object>();
+			//Map<String, Object> api_manager_data = new HashMap<String, Object>();
+			//Map<String, Object> session_manager_data = new HashMap<String, Object>();
 			
-			api_manager_data.put("session_id", sessionid);
-			api_manager_data.put("status", status);
+			api_manager_message_for_pubsub.put("session_id", sessionid);
+			api_manager_message_for_pubsub.put("status", status);
 			
-			api_manager_message_for_pubsub.put("data", api_manager_data);
+			//api_manager_message_for_pubsub.put("data", api_manager_data);
 			
-			session_manager_data.put("session_id", sessionid);
-			session_manager_data.put("status", status);
-			session_manager_data.put("processed_data", summary_string);
+			session_manager_message_for_pubsub.put("session_id", sessionid);
+			session_manager_message_for_pubsub.put("status", status);
+			session_manager_message_for_pubsub.put("processed_data", summary_string);
 			
-			session_manager_message_for_pubsub.put("data", session_manager_data);
+			//session_manager_message_for_pubsub.put("data", session_manager_data);
 			
 // 			System.out.println(api_manager_message_for_pubsub);
 // 			System.out.println(session_manager_message_for_pubsub);
