@@ -4,6 +4,8 @@ import Navbar from './components/layout/Navbar';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Search from './components/search/Search';
+import Session from './components/sessions/Session';
+import PrivateRoute from './components/routing/PrivateRoute';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // Redux
 import { Provider } from 'react-redux';
@@ -34,7 +36,8 @@ const App = () => {
             <Route exact path='/' component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/dashboard" component={Search} />
+            <PrivateRoute exact path="/dashboard" component={Search} />
+            <PrivateRoute exact path="/sessions" component={Session} />
           </Switch>
 
         </Fragment>

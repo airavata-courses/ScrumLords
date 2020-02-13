@@ -9,27 +9,36 @@ import { logout } from '../../actions/auth'
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const authLinks = (
+        <Fragment>
+            <h1>
+                <Link to='/dashboard'><i className="fas fa-cloud fa-2x" style={{ paddingRight: 15 }}></i></Link>
+            </h1>
 
-        <ul className="navbar-right">
-            <li><a onClick={logout} href="/">Logout</a></li>
-        </ul>
+            <ul className="navbar-right">
+                <li><Link to='/sessions'>Jobs</Link></li>
+                <li><a onClick={logout} href="/">Logout</a></li>
+            </ul>
+        </Fragment>
 
     )
 
     const guestLinks = (
+        <Fragment>
+            <h1>
+                <Link to='/'><i className="fas fa-cloud fa-2x" style={{ paddingRight: 15 }}></i></Link>
+            </h1>
 
-        <ul className="navbar-right">
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/register">Register</Link></li>
-        </ul>
+            <ul className="navbar-right">
+                <li><Link to="/login">Login</Link></li>
+                <li><Link to="/register">Register</Link></li>
+            </ul>
+        </Fragment>
 
     )
+
     return (
         <div>
             <nav className="navbar bg-dark">
-                <h1>
-                    <Link to='/'><i className="fas fa-cloud-moon fa-2x" style={{ paddingRight: 15 }}></i></Link>
-                </h1>
                 {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
             </nav>
         </div >
