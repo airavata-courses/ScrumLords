@@ -2,7 +2,6 @@ import base64
 import json
 from collections import defaultdict
 
-from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
@@ -10,6 +9,8 @@ import os
 from datetime import datetime, timedelta
 
 from rest_framework.response import Response
+
+from data_retrieval.pubsub.utils import handle_pubsub_retry, publish_event
 
 PROJECT_ID = os.environ["PUBSUB_PROJECT_ID"]
 MODEL_EXECUTE = os.environ["MODEL_EXECUTE_TOPIC"]
@@ -21,6 +22,10 @@ UPDATE_SESSION = os.environ["UPDATE_SESSION_TOPIC"]
 def retrieve_historical_data(request):
     # data has session_id, latitude, longitude, n_days_before and n_days_after
     data = json.loads(base64.b64decode(request.data["message"]["data"]).decode("utf-8"))
+
+    retry_limit_exceeded = handle_pubsub_retry(request=request.data, data=data)
+    if retry_limit_exceeded:
+        return Response(status=status.HTTP_200_OK)
 
     # data = request.data.get("data")
     latitude, longitude, n_days_before, n_days_after, api_key = (
