@@ -30,19 +30,8 @@ body {
     font-weight: 300;
     font-size: 1rem;
     line-height: 1.7;
-    overflow: hidden;
-    background: url('./img/bg-1.jpg') no-repeat center center/cover;
+    background: url('./img/bg.jpg') no-repeat center center/cover;
 }
-
-#login {
-    font-family: 'Montserrat', sans-serif ;
-    font-weight: 300;
-    font-size: 1rem;
-    line-height: 1.7;
-    overflow: hidden;
-    background: url('./img/bg-1.jpg') no-repeat center center/cover;
-}
-
 
 /* Utilities */
 .container {

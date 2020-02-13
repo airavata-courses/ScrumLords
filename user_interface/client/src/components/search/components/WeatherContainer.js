@@ -76,8 +76,8 @@ export const WeatherContainer = () => {
                 };
                 const body = JSON.stringify({ user_id, city_id });
                 // for sending response 
-                const res = axios.post('http://localhost:8000/session/create', body, config);
-                console.log(body)
+                const res = await axios.post('http://localhost:8000/session/create', body, config);
+                console.log(res);
             })
     }
 
@@ -109,8 +109,8 @@ export const WeatherContainer = () => {
                 <h3>WEATHER.IO</h3>
 
                 <div>
-                    <input placeholder="City Name..." className="search-input1" onChange={updateSearch1} />
-                    <input placeholder="State" className="search-input2" onChange={updateSearch2} />
+                    <input placeholder="City Name" className="search-input1" onChange={updateSearch1} />
+                    <input placeholder="State ID" className="search-input2" onChange={updateSearch2} />
                     <button className="material-icons" onClick={getWeatherData}>search</button>
                 </div>
 
