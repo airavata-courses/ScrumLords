@@ -37,3 +37,4 @@ shipmnts-pubsub==0.0.27
 shipmnts-utils==0.0.35
 gunicorn==19.9.0
 django-cors-headers==3.2.1
+redis==3.4.1
