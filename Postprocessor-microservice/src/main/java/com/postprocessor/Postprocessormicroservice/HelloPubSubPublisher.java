@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class HelloPubSubPublisher extends PubSubPublisher {
-	@Autowired
-    public HelloPubSubPublisher(PubSubTemplate pubSubTemplate) {
-        super(pubSubTemplate);
-    }
+  @Autowired
+  public HelloPubSubPublisher(PubSubTemplate pubSubTemplate) {
+    super(pubSubTemplate);
+  }
 
-    @Override
-    protected String topic() {
-        return "testTopic";
-    }
+  @Override
+  protected String topic() {
+    return "testTopic";
+  }
 }
