@@ -31,8 +31,6 @@ def retrieve_historical_data(request):
         os.environ["DARK_SKY_API_KEY"],
     )
 
-    print(n_days_before, n_days_after)
-
     current_datetime = datetime.now()
     weather_history = defaultdict(dict)
 

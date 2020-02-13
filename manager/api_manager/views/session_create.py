@@ -1,14 +1,12 @@
 import os
 
-from django.db.models import Q
-from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 
-from api_manager.exceptions import record_not_found_error
 from api_manager.models.city import City
+from api_manager.pubsub.utils import publish_event
 from api_manager.serializers import SessionSerializer
 
 
@@ -21,18 +19,8 @@ SAVE_SESSION = os.environ["SAVE_SESSION_TOPIC"]
 def start_session_pipeline(request):
     user_id = request.data.get("user_id")
     geo_id = request.data.get("city_id")
-    # city_name = request.data.get("city")
-    # state_name = request.data.get("state")
 
     city = get_object_or_404(City, pk=geo_id)
-    # city = City.objects.filter(
-    #     Q(name__icontains=city_name) & Q(admin_code_1__icontains=state_name)
-    # ).get()
-
-    # try:
-    #     city = City.objects.filter(Q(latitude=latitude) & Q(longitude=longitude)).get()
-    # except Exception:
-    #     record_not_found_error("City object not found.")
 
     session_serializer = SessionSerializer(
         data={

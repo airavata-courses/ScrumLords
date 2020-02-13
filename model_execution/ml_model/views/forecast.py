@@ -2,7 +2,6 @@ import base64
 import json
 from collections import defaultdict
 
-from pb.publish_event import publish_event
 from rest_framework import status
 from rest_framework.decorators import api_view
 import requests
@@ -11,6 +10,7 @@ from datetime import datetime, timedelta
 
 from rest_framework.response import Response
 
+from ml_model.pubsub.utils import handle_pubsub_retry, publish_event
 
 PROJECT_ID = os.environ["PUBSUB_PROJECT_ID"]
 POST_PROCESS = os.environ["POST_PROCESS_TOPIC"]
@@ -32,6 +32,10 @@ def get_url(api_key: str, latitude: str, longitude: str, date: datetime = None) 
 def forecast_weather(request):
     # data has session_id, latitude, longitude and n_days_after
     data = json.loads(base64.b64decode(request.data["message"]["data"]).decode("utf-8"))
+
+    retry_limit_exceeded = handle_pubsub_retry(request=request.data, data=data)
+    if retry_limit_exceeded:
+        return Response(status=status.HTTP_200_OK)
 
     # data = request.data.get("data")
 
