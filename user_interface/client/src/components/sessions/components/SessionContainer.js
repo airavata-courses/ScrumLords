@@ -13,7 +13,15 @@ const SessionContainer = () => {
                 const res_data = res.data.data
 
                 let temp = []
-                res_data.forEach(sessionData => temp.push({ name: sessionData.name, latitude: sessionData.latitude, longitude: sessionData.longitude, geo_id: sessionData.geo_id }))
+                res_data.forEach(sessionData => temp.push({
+                    id: sessionData.id
+                    , name: sessionData.name
+                    , state: sessionData.admin_code
+                    , latitude: sessionData.latitude
+                    , longitude: sessionData.longitude
+                    , geo_id: sessionData.geo_id
+                    , created: sessionData.created
+                }))
                 setSessionDetails(temp)
 
             } catch (err) {
@@ -24,25 +32,38 @@ const SessionContainer = () => {
     }, []);
 
 
+    const getForecast = async (session) => {
+        const session_id = session.id
+        const session_res = await axios.get(`http://localhost:8000/session/${session_id}/get`)
+        console.log(session_res)
+        const forecast_res = await axios.get(`http://localhost:8000/session/${session_id}/forecast`)
+        console.log(forecast_res)
+
+    }
+
+
     return (
         <section className="session_container">
-            <div className="headers">
-                <h2>City</h2>
-                <h2>Latitude</h2>
-                <h2>Longitude</h2>
-                <h2>Geo_ID</h2>
-            </div>
             <section className="session-list">
                 <ul>
                     {sessionDetails.map(session => (
-                        <Fragment>
-                            <a href='#'><li key={session.id}><span>{session.name}</span> <span>{session.latitude}</span> <span>{session.longitude}</span> <span>{session.geo_id}</span></li></a>
+                        <Fragment key={session.id}>
+                            <a value={session.id} onClick={() => { getForecast(session) }}> <li key={session.id}>
+                                <span>City -> {session.name}</span>
+                                <span>State -> {session.state}</span>
+                                <span>Latitude -> {session.latitude}</span>
+                                <span>Longitude -> {session.longitude}</span>
+                                <span>Geo_ID -> {session.geo_id}</span>
+                                <span>Date Created -> {session.created}</span>
+                            </li></a>
                         </Fragment>
                     ))}
                 </ul>
             </section>
         </section >
     )
+
 }
+
 
 export default SessionContainer
