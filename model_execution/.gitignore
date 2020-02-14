@@ -36,7 +36,6 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
-
 Pickle/
 
 # PyInstaller
@@ -116,5 +115,3 @@ venv.bak/
 
 # mypy
 .mypy_cache/
-
-node_modules/
