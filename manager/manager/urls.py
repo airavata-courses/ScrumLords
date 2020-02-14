@@ -35,5 +35,5 @@ urlpatterns = [
     url(r"^session/(?P<session_id>\w+)/get", get_session),
     url(r"^session/(?P<session_id>\w+)/history", get_retrieved_data),
     url(r"^session/(?P<session_id>\w+)/forecast", get_forecast_data),
-    url(r"^session/(?P<session_id>\w+)/forecast", get_processed_data),
+    url(r"^session/(?P<session_id>\w+)/summary", get_processed_data),
 ]
