@@ -17,9 +17,7 @@ const SessionContainer = () => {
                     id: sessionData.id
                     , name: sessionData.name
                     , state: sessionData.admin_code
-                    , latitude: sessionData.latitude
-                    , longitude: sessionData.longitude
-                    , geo_id: sessionData.geo_id
+                    , visible_id: sessionData.visible_id
                     , created: sessionData.created
                 }))
                 setSessionDetails(temp)
@@ -30,15 +28,38 @@ const SessionContainer = () => {
         }
         getSessionData();
     }, []);
+    console.log(sessionDetails)
 
+
+    const getHistory = async (session) => {
+        const session_id = session.id
+        const weather_history = await axios.get(`http://localhost:8000/session/${session_id}/get`)
+        let json = JSON.stringify(weather_history.data.data)
+        json = json.replace(/,"/g, ',\n"');
+        let tab = window.open('about:blank', '_blank');
+        tab.document.write(`<pre>${json}</pre>`); // where 'html' is a variable containing your HTML
+        tab.document.close(); // to finish loading the page
+    }
 
     const getForecast = async (session) => {
         const session_id = session.id
-        const session_res = await axios.get(`http://localhost:8000/session/${session_id}/get`)
-        console.log(session_res)
-        const forecast_res = await axios.get(`http://localhost:8000/session/${session_id}/forecast`)
-        console.log(forecast_res)
+        const weather_forecast = await axios.get(`http://localhost:8000/session/${session_id}/forecast`)
+        let json = JSON.stringify(weather_forecast.data.data)
+        json = json.replace(/,"/g, ',\n"');
+        let tab = window.open('about:blank', '_blank');
+        tab.document.write(`<pre>${json}</pre>`); // where 'html' is a variable containing your HTML
+        tab.document.close(); // to finish loading the page
+    }
 
+
+    const getSummary = async (session) => {
+        const session_id = session.id
+        const weather_summary = await axios.get(`http://localhost:8000/session/${session_id}/summary`)
+        let json = JSON.stringify(weather_summary.data.data)
+        json = json.replace(/\\n/g, '\n');
+        let tab = window.open('about:blank', '_blank');
+        tab.document.write(`<pre>${json}</pre>`); // where 'html' is a variable containing your HTML
+        tab.document.close(); // to finish loading the page
     }
 
 
@@ -48,14 +69,17 @@ const SessionContainer = () => {
                 <ul>
                     {sessionDetails.map(session => (
                         <Fragment key={session.id}>
-                            <a value={session.id} onClick={() => { getForecast(session) }}> <li key={session.id}>
-                                <span>City -> {session.name}</span>
-                                <span>State -> {session.state}</span>
-                                <span>Latitude -> {session.latitude}</span>
-                                <span>Longitude -> {session.longitude}</span>
-                                <span>Geo_ID -> {session.geo_id}</span>
-                                <span>Date Created -> {session.created}</span>
-                            </li></a>
+                            <div>
+                                <li key={session.id}>
+                                    <span>CITY -> {session.name}</span>
+                                    <span>STATE -> {session.state}</span>
+                                    <span>SESSION_ID -> {session.visible_id}</span>
+                                    <span>DATE_CREATED -> {session.created}</span>
+                                    <button value={session.id} onClick={() => { getHistory(session) }}>Weather History</button>
+                                    <button value={session.id} onClick={() => { getForecast(session) }}>Weather Forecast</button>
+                                    <button value={session.id} onClick={() => { getSummary(session) }}>Forecast Summary</button>
+                                </li>
+                            </div>
                         </Fragment>
                     ))}
                 </ul>

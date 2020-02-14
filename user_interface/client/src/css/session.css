@@ -21,8 +21,7 @@ ul {
   
   .session-list  li {
     font: 200 20px/1.5 'Montserrat', sans-serif;
-    padding: 20px;
-    text-transform: uppercase;
+    padding: 40px;
     letter-spacing: 1px;
   }
   
@@ -30,7 +29,7 @@ ul {
     border: none;
   }
   
-  .session-list a {
+  .session-list div {
     text-decoration: none;
     color: #000;
     border-bottom: 2px solid black;
@@ -41,17 +40,36 @@ ul {
     transition: font-size 0.3s ease, background-color 0.3s ease;
     display: block;
     width: 100%;
-    cursor: pointer;
   }
   
-  .session-list a:hover {
+  .session-list div:hover {
     font-size: 40px;
-    background: #f6f6f6;
+    transition: 0.3s ease-in;
+    box-shadow: 10px 10px 26px 0 rgba(0.9,0.9,0.9,0.9);
   }
 
-  span {
+ .session-list span {
       display: block;
-
   }
   
+ button {
+    margin-top: 22px;
+    color: #eee;
+    margin-left: 7vh;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    padding: 10px;
+    font-size: 15px;
+    background: #5cb85c;
+    letter-spacing: 1px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+  transition: 0.9s ease;
+  box-shadow: 2px 4px 16px 0 rgba(0,0,0,0.5);
+}
 
