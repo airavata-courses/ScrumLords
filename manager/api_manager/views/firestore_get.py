@@ -29,3 +29,15 @@ def get_forecast_data(request, session_id):
         record_not_found_error("No forecast data available for this session.")
     except TypeError:
         record_not_found_error("Session not found.")
+
+
+@api_view(["GET"])
+def get_processed_data(request, session_id):
+    doc_ref = fs_client.collection("sessions").document(session_id)
+    try:
+        data = doc_ref.get().to_dict()
+        return Response({"data": data["processed_data"]}, status=status.HTTP_200_OK)
+    except KeyError:
+        record_not_found_error("No summary data available for this session.")
+    except TypeError:
+        record_not_found_error("Session not found.")

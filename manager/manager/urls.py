@@ -17,7 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 
-from api_manager.views.firestore_get import get_retrieved_data, get_forecast_data
+from api_manager.views.firestore_get import (
+    get_retrieved_data,
+    get_forecast_data,
+    get_processed_data,
+)
 from api_manager.views.session_create import start_session_pipeline
 from api_manager.views.session_get import get_all_sessions, get_session
 from api_manager.views.session_status import get_session_status, update_session_status
@@ -31,4 +35,5 @@ urlpatterns = [
     url(r"^session/(?P<session_id>\w+)/get", get_session),
     url(r"^session/(?P<session_id>\w+)/history", get_retrieved_data),
     url(r"^session/(?P<session_id>\w+)/forecast", get_forecast_data),
+    url(r"^session/(?P<session_id>\w+)/forecast", get_processed_data),
 ]
