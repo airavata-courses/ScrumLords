@@ -6,6 +6,8 @@ This is our repository for developing a Weather Forecast Platform, spread across
 
 **Technologies coming next:** Google Kubernetes Engine, Cloud Run, Cloud Build, Google Container Registry, Elasticsearch
 
+![architecture_diagram](/architecture_diagrams/Architecture-milestone-1.png)
+
 For setup and installation steps, click [here](https://github.com/airavata-courses/ScrumLords/wiki/Get-up-and-running).
 
 ## Team members:
