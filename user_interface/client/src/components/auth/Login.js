@@ -4,9 +4,69 @@ import PropTypes from 'prop-types'
 import { login } from '../../actions/auth';
 import { Redirect } from 'react-router-dom';
 
+import {
+    Avatar, Button, TextField, Link, Box, Grid, Typography
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
+
+function Copyright() {
+    return (
+        <Typography variant="body2" color="textSecondary" align="center">
+            {'Copyright © '}
+            <Link color="inherit" href="#">
+                Weather-io
+      </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+        </Typography>
+    );
+}
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        height: '100vh',
+    },
+    paper: {
+        margin: theme.spacing(14, 6),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+    },
+    avatar: {
+        margin: theme.spacing(2),
+        backgroundColor: '#00BFA6',
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(4),
+    },
+    submit: {
+        background: '#5e5e5e',
+        border: 0,
+        borderRadius: 20,
+        boxShadow: 'rgba(255, 105, 135, .3)',
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        margin: theme.spacing(3, 0, 3),
+    },
+
+    link: {
+        fontFamily: 'Montserrat',
+        fontWeight: 600,
+        color: '#00BFA6'
+    },
+
+    header: {
+        fontFamily: 'Montserrat',
+        fontWeight: 600,
+        textTransform: 'uppercase',
+    },
+}));
 
 const Login = (props) => {
 
+    const classes = useStyles();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -32,19 +92,68 @@ const Login = (props) => {
 
     return (
         <Fragment>
-            <section className="container dark-overlay">
-                <h1 className="form-title-login">Login</h1>
-                <form className="form" onSubmit={e => onSubmit(e)}>
-                    <div className="form-group">
-                        <input type="email" placeholder="enter email" name="email" value={email} onChange={e => onChange(e)} required />
-                    </div>
-                    <div className="form-group">
-                        <input type="password" placeholder="password" name="password" value={password} onChange={e => onChange(e)} required />
-                    </div>
-                    <input type="submit" className="btn btn-primary" value="login" />
+            <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                </Avatar>
+                <Typography component="h1" variant="h6" className={classes.header} color="textSecondary">
+                    Welcome to Weather-io
+                </Typography>
+                <form className={classes.form} onSubmit={e => onSubmit(e)}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="email"
+                        label="Email Address"
+                        name="email"
+                        autoComplete="email"
+                        autoFocus
+                        type="email"
+                        value={email}
+                        onChange={e => onChange(e)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="password"
+                        label="Password"
+                        type="password"
+                        id="password"
+                        value={password}
+                        onChange={e => onChange(e)}
+                        autoComplete="current-password"
+                    />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        value="login">
+                        Sign In
+                        </Button>
+                    <Grid container>
+                        <Grid item xs>
+                            <Link href="#" variant="body2" className={classes.link}>
+                                Forgot password?
+                            </Link>
+                        </Grid>
+                        <Grid item>
+                            <Link href="/register" variant="body2" className={classes.link}>
+                                {"New Here? Create Account"}
+                            </Link>
+                        </Grid>
+                    </Grid>
+                    <Box mt={5}>
+                        <Copyright />
+                    </Box>
                 </form>
-            </section>
-        </Fragment>
+            </div>
+        </Fragment >
     )
 }
 
