@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         height: '100vh',
     },
     paper: {
-        margin: theme.spacing(14, 6),
+        margin: theme.spacing(8, 6),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -144,7 +144,7 @@ const Login = (props) => {
                         </Grid>
                         <Grid item>
                             <Link href="/register" variant="body2" className={classes.link}>
-                                {"New Here? Create Account"}
+                                {"New Here? Register"}
                             </Link>
                         </Grid>
                     </Grid>
