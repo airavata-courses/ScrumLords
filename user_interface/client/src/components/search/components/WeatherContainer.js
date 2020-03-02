@@ -58,27 +58,35 @@ export const WeatherContainer = () => {
         fetch(`http://api.openweathermap.org/data/2.5/weather?q=${searchQuery1},${searchQuery2},us&units=imperial&appid=${API_KEY}`)
             .then(res => res.json())
             .then(async data => {
-                const user = await axios.get('/api/auth');
-                const user_id = user.data._id
-                let city_id = data.id;
-                setWeatherData({
-                    temp: data.main.temp,
-                    humidity: data.main.humidity,
-                    desc: data.weather[0].main,
-                    city: data.name
-                })
-                console.log(data)
 
-                const config = {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                };
-                const body = JSON.stringify({ user_id, city_id });
-                // for sending response 
-                const res = await axios.post('http://localhost:8000/session/create', body, config);
-                console.log(res);
-            })
+                try {
+                    const user = await axios.get('/api/auth');
+                    const user_id = user.data._id
+                    let city_id = data.id;
+                    setWeatherData({
+                        temp: data.main.temp,
+                        humidity: data.main.humidity,
+                        desc: data.weather[0].main,
+                        city: data.name
+                    })
+                    console.log(data)
+
+                    const config = {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    };
+                    const body = JSON.stringify({ user_id, city_id });
+                    // for sending response 
+                    const res = await axios.post('http://localhost:8000/session/create', body, config);
+                    alert('Job Submitted')
+                    console.log(res);
+
+                } catch (err) {
+                    console.log(err);
+                    alert('Submission Failed')
+                }
+            });
     }
 
     /*
@@ -104,24 +112,61 @@ export const WeatherContainer = () => {
     )
     */
     return (
-        <section className="weather-container">
-            <header className="weather-header">
-                <h3>WEATHER.IO</h3>
 
-                <div>
-                    <input placeholder="City Name" className="search-input1" onChange={updateSearch1} />
-                    <input placeholder="State ID" className="search-input2" onChange={updateSearch2} />
-                    <button className="material-icons" onClick={getWeatherData}>search</button>
+        <div className="ui grid">
+            <div className="three column row">
+                <div className="column">
+                    <div className="ui card" id="card1">
+                        <div className="header">Jobs Submitted</div>
+                        <hr />
+                        <h2>24</h2>
+                    </div>
                 </div>
+                <div className="column">
+                    <div className="ui card" id='card2'>
+                        <div className="header">Jobs Executing</div>
+                        <hr />
+                        <h2>4</h2>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="ui card" id='card3'>
+                        <div className="header">Jobs Completed</div>
+                        <hr />
+                        <h2>20</h2>
+                    </div>
+                </div>
+            </div>
 
-            </header>
-            <section className="weather-info">
-                {weatherData.temp === null ? (
-                    <p>No Weather to Display<i className="material-icons">wb_sunny</i></p>
-                ) : <WeatherInfo data={weatherData} />
-                }
-            </section>
-        </section>
+
+            <div className="ui search">
+                <div className="ui input" id="city-search" >
+                    <input className="prompt" type="text" placeholder="Enter city..." id="city" onChange={updateSearch1} />
+                    <input className="prompt" type="text" placeholder="Enter state..." id="state" onChange={updateSearch2} />
+                </div>
+                <button className="ui grey button right floated" id="btn1" onClick={getWeatherData}>Submit Job</button>
+            </div>
+
+        </div >
+
+        /* <section className="weather-container">
+                <header className="weather-header">
+                    <h3>WEATHER.IO</h3>
+
+                    <div>
+                        <input placeholder="City Name" className="search-input1" onChange={updateSearch1} />
+                        <input placeholder="State ID" className="search-input2" onChange={updateSearch2} />
+                        <button className="material-icons" onClick={getWeatherData}>search</button>
+                    </div>
+
+                </header>
+                <section className="weather-info">
+                    {weatherData.temp === null ? (
+                        <p>No Weather to Display<i className="material-icons">wb_sunny</i></p>
+                    ) : <WeatherInfo data={weatherData} />
+                    }
+                </section>
+            </section> */
     )
 
 }

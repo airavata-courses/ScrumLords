@@ -9,7 +9,6 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 
-
 const useStyles = makeStyles(theme => ({
     link: {
         marginTop: '30px',
@@ -31,22 +30,22 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
     const authLinks = (
         <Fragment>
-            <h1>
-                <Link to='/dashboard'>Home</Link>
-            </h1>
+            <div className="ui inverted segment">
+                <div className="ui inverted secondary pointing large menu">
+                    <Link to='/dashboard' className="item">Dashboard</Link>
+                    <Link to='/sessions' className="item">Jobs</Link>
 
-            <ul className="navbar-right">
-                <li><Link to='/sessions'>Jobs</Link></li>
-                <li><a onClick={logout} href="/">Logout</a></li>
-            </ul>
+                    <div className="right menu">
+                        <a className="item" onClick={logout} href="/">Logout</a>
+                    </div>
+                </div>
+            </div>
         </Fragment>
 
     )
 
     const guestLinks = (
-        <Fragment>
-
-        </Fragment>
+        <Fragment></Fragment>
     )
 
     return (
