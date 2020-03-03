@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.postprocessor</groupId>
-	<artifactId>Postprocessor-microservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Postprocessor-microservice</name>
+	<artifactId>postprocessor</artifactId>
+	<version>0.0.1</version>
+	<name>postprocessor</name>
 	<description>Microservice to support postprocessing and analysis</description>
 
 	<properties>
