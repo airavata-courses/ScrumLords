@@ -103,7 +103,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
-
+firestore/
 # Spyder project settings
 .spyderproject
 .spyproject
