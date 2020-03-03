@@ -3,6 +3,7 @@ import WeatherInfo from './WeatherInfo';
 import axios from 'axios'
 
 export const WeatherContainer = () => {
+
     const API_KEY = '4c3f87318d7dda9dbf7b495c8c670333'
     const [searchQuery1, setSearchQuery1] = useState();
     const [searchQuery2, setSearchQuery2] = useState();
@@ -79,8 +80,8 @@ export const WeatherContainer = () => {
                     const body = JSON.stringify({ user_id, city_id });
                     // for sending response 
                     const res = await axios.post('http://localhost:8000/session/create', body, config);
-                    alert('Job Submitted')
                     console.log(res);
+                    window.alert('Job Submitted')
 
                 } catch (err) {
                     console.log(err);
