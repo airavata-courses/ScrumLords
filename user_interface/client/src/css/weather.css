@@ -3,118 +3,81 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
-.weather-container {
-  background: transparent;
-
-  height: 625px;
-  width: 60%;
-  box-shadow: 2px 4px 16px 0 rgba(0,0,0,0.5);
-  border-radius: 5px;
-  position: relative;
-  padding: 10px;
+.grid {
+  position: absolute;
+  top: 20%;
 }
 
-.weather-header h3 {
-  font-size: 2.75rem;
-  font-weight: 500;
-  letter-spacing: 2px;
+.header {
+  padding: 15px 10px;
   text-align: center;
-  font-family: 'Monoton', sans-serif;
-  letter-spacing: 4px;
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+  color: rgb(240, 240, 240);
 }
 
-.weather-header div {
-  width: 70%;
-  margin: auto;
-  display: flex;
-  margin-top: 40px;
+.card {
+  height: 150px;
+  box-shadow: 2px 4px 16px rgba(0,0,0,0.8);
+  transition: 1s ease-out;
 }
 
-.search-input1 {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid black;
-  padding: 4px;
-  outline: none;
+.card:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  transition: 0.5s ease-out;
+  border-radius: 20px;
+}
+
+#card1 {
+  background-color: rgb(143, 187, 214);
+}
+
+#card2 {
+  background-color: rgb(207, 177, 131);
+}
+
+#card3 {
+  background-color: rgb(129, 199, 190);
+}
+
+.card hr {
   width: 100%;
-  color: rgb(54, 55, 57);
-  font-size: 1.2rem;
-  margin: 2px;
-  border-radius: 10px;
+  margin-top: 5%;
 }
 
-.search-input2 {
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid black;
-  padding: 4px;
-  outline: none;
-  width: 70%;
-  color: rgb(54, 55, 57);
-  font-size: 1.2rem;
-  margin: 2px;
-  border-radius: 10px;
-}
-
-.weather-header button {
-  border: 2px solid black;
-  background: transparent;
-  cursor: pointer;
-  outline: none;
-  padding: 5px;
-  margin: 2px;
-  border-radius: 10px;
-  color: black;
-}
-
-.search-input::-webkit-input-placeholder {
-  font-size: 1.1rem;
-  color: rgb(54, 55, 57);
-  opacity: 0.5;
-}
-
-.weather-info {
-  display: flex;
-  height: 300px;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.6rem;
-  flex-direction: column;
-  margin-top: 65px
-}
-
-.weather-info i{
-  color: yellow;
-  position: relative;
-  top: 5px;
-  left: 5px;
-  font-size: 30px;
-  animation: rotateSun 5s infinite linear;
-}
-
-@keyframes rotateSun {
-  to {
-      transform: rotate(360deg);
-  }
-}
-
-.error {
+.card h2 {
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 0;
-  font-size: 1.3rem;
-  color: rgba(225, 62, 44, 0.906);
+  color: rgb(240, 240, 240);
+  font-family: 'Montserrat';
+  font-weight: 600;
 }
 
-.header-description {
-  width: 100%;
+#btn1{
+  text-transform: uppercase;
   text-align: center;
+  font-family: 'Montserrat';
+  font-weight: 600;
+  background: rgb(129, 128, 128);
+  color: rgb(240, 240, 240);
   margin-top: 20px;
 }
 
-.header-description p{
-  display: inline-block;
+#city-search {
+  display: flex;
+  width: 100%;
+  margin-top: 10%;
+}
+
+#city, #state {
+  padding: 18px 10px;
+  margin: 0 10px;
+  font-size: 15px;
+  font-family: 'Montserrat';
+  text-transform: uppercase;
 }

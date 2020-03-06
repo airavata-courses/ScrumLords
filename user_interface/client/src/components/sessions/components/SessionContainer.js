@@ -11,6 +11,7 @@ const SessionContainer = () => {
                 const user_id = user.data._id;
                 const res = await axios.get(`http://localhost:8000/user/${user_id}/sessions`)
                 const res_data = res.data.data
+                console.log(res_data)
 
                 let temp = []
                 res_data.forEach(sessionData => temp.push({
@@ -19,6 +20,7 @@ const SessionContainer = () => {
                     , state: sessionData.admin_code
                     , visible_id: sessionData.visible_id
                     , created: sessionData.created
+                    , status: sessionData.status
                 }))
                 setSessionDetails(temp)
 
@@ -64,29 +66,37 @@ const SessionContainer = () => {
 
 
     return (
-        <section className="session_container">
-            <section className="session-list">
-                <ul>
-                    {sessionDetails.map(session => (
-                        <Fragment key={session.id}>
-                            <div>
-                                <li key={session.id}>
-                                    <span>CITY -> {session.name}</span>
-                                    <span>STATE -> {session.state}</span>
-                                    <span>SESSION_ID -> {session.visible_id}</span>
-                                    <span>DATE_CREATED -> {session.created}</span>
-                                    <button value={session.id} onClick={() => { getHistory(session) }}>Weather History</button>
-                                    <button value={session.id} onClick={() => { getForecast(session) }}>Weather Forecast</button>
-                                    <button value={session.id} onClick={() => { getSummary(session) }}>Forecast Summary</button>
-                                </li>
-                            </div>
-                        </Fragment>
-                    ))}
-                </ul>
-            </section>
-        </section >
-    )
+        <div className="ui container divided items">
+            {sessionDetails.map(session => (
+                <div className="item content" key={session.id}>
 
+                    <div className="content session-card">
+                        <a className="header">{session.name}, {session.state}</a>
+                        <div className="meta">JOB ID ({session.visible_id})</div>
+                        <div className="description">
+                            <img
+                                src="https://react.semantic-ui.com/images/wireframe/short-paragraph.png"
+                                className="ui image rounded" />
+                        </div>
+                        <div className="extra">
+
+                            <div className="ui black label pointing">Created : {session.created.slice(0, 10)}</div>
+                            <div className="ui black label pointing">Status : {session.status}</div>
+
+                            <div className="ui primary right floated small buttons">
+                                <button className="ui button" value={session.id} onClick={() => { getHistory(session) }}>History</button>
+                                <div className="or"></div>
+                                <button className="ui button" value={session.id} onClick={() => { getForecast(session) }}>Forecast</button>
+                                <div className="or"></div>
+                                <button className="ui button" value={session.id} onClick={() => { getSummary(session) }}>Summary</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+            )}
+        </div >
+    )
 }
 
 

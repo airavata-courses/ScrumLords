@@ -3,44 +3,54 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth'
+import {
+    AppBar, Toolbar, Typography, Grid
+} from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 
-// To replace <a> tage wit Link
+
+const useStyles = makeStyles(theme => ({
+    link: {
+        marginTop: '30px',
+        color: 'black',
+        fontWeight: 600,
+        fontFamily: 'Montserrat',
+        textDecoration: 'none',
+        textTransform: 'uppercase',
+        textAlign: 'center',
+    },
+
+}));
+
+
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
+    const classes = useStyles();
+
     const authLinks = (
         <Fragment>
-            <h1>
-                <Link to='/dashboard'><i className="fas fa-cloud fa-2x" style={{ paddingRight: 15 }}></i></Link>
-            </h1>
+            <div className="ui inverted segment">
+                <div className="ui inverted secondary pointing large menu">
+                    <Link to='/dashboard' className="item">Dashboard</Link>
+                    <Link to='/sessions' className="item">Jobs</Link>
 
-            <ul className="navbar-right">
-                <li><Link to='/sessions'>Jobs</Link></li>
-                <li><a onClick={logout} href="/">Logout</a></li>
-            </ul>
+                    <div className="right menu">
+                        <a className="item" onClick={logout} href="/">Logout</a>
+                    </div>
+                </div>
+            </div>
         </Fragment>
 
     )
 
     const guestLinks = (
-        <Fragment>
-            <h1>
-                <Link to='/'><i className="fas fa-cloud fa-2x" style={{ paddingRight: 15 }}></i></Link>
-            </h1>
-
-            <ul className="navbar-right">
-                <li><Link to="/login">Login</Link></li>
-                <li><Link to="/register">Register</Link></li>
-            </ul>
-        </Fragment>
-
+        <Fragment></Fragment>
     )
 
     return (
         <div>
-            <nav className="navbar bg-dark">
-                {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
-            </nav>
+            {!loading && (<Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>)}
         </div >
     )
 }
