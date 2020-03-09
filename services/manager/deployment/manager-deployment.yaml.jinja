@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: manager
+  namespace: {{ kube_namespace }}
+  labels:
+    app: api-manager
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: manager
+  template:
+    metadata:
+      labels:
+        run: manager
+    spec:
+      containers:
+      - image: {{ manager_image_name }}:{{- manager_version_tag }}
+        imagePullPolicy: {{ manager_image_pull_policy }}
+        ports:
+        - containerPort: 8000
+          name: manager
+          protocol: TCP
+        name: manager
+        command: ["/bin/sh", "-c"]
+        args: ["wget -O /manager/api_manager/firestore/pubsub-firestore-development.json https://www.dropbox.com/s/51l60y245m60nt1/pubsub-firestore-development.json?dl=1; gunicorn -c gconf.py manager.wsgi"]
+        env:
+        {%- for item in manager_envs %}
+        - name: {{ item }}
+          value: {{ manager_envs[item] }}
+        {%- endfor %}

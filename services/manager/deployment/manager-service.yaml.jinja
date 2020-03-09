@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: manager
+  namespace: {{ kube_namespace }}
+  labels:
+    app: api-manager
+spec:
+  ports:
+    - port: 8000
+      targetPort: 8000
+      protocol: TCP
+      name: http
+  selector:
+    run: manager
+  type: NodePort
