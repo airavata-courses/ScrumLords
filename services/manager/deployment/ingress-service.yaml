@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: backend-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /manager/*
+        backend:
+          serviceName: manager
+          servicePort: 8000
+#      - path: /model_execution/*
+#        backend:
+#          serviceName: model-execution
+#          servicePort: 8200
