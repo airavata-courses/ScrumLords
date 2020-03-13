@@ -4,7 +4,7 @@
   "loadBalancerIp": "55.324.34.222",
   "loadBalancerUrl": "api.weather.forecast.com",
   "manager_image_pull_policy": "Always",
-  "manager_version_tag": "xyz",
+  "manager_version_tag": "init",
   "manager_image_name": "gcr.io/weather-forecast-266119/manager",
   "manager_envs": {
     "DJANGO_ENV": "development",
@@ -14,7 +14,7 @@
     "POSTGRES_HOST": "35.222.109.219",
     "POSTGRES_PORT": "\"5432\"",
     "PUBSUB_EMULATOR_HOST": "localhost:8085",
-    "PUBSUB_PROJECT_ID": "weather-forecast-26619",
+    "PUBSUB_PROJECT_ID": "weather-forecast-266119",
     "DATA_RETRIEVAL_ENDPOINT": "http://127.0.0.1:8200/dark/history",
     "DATA_RETRIEVAL_TOPIC": "data_retrieval",
     "SAVE_SESSION_ENDPOINT": "http://127.0.0.1:8100/session/save",

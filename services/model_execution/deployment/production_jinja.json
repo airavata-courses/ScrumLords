@@ -1,0 +1,21 @@
+{
+  "minikube": false,
+  "kube_namespace": "default",
+  "loadBalancerIp": "55.324.34.222",
+  "loadBalancerUrl": "api.weather.forecast.com",
+  "model_execution_image_pull_policy": "Always",
+  "model_execution_version_tag": "init",
+  "model_execution_image_name": "gcr.io/weather-forecast-266119/model_execution",
+  "model_execution_envs": {
+    "DJANGO_ENV": "development",
+    "PUBSUB_EMULATOR_HOST": "localhost:8085",
+    "PUBSUB_PROJECT_ID": "weather-forecast-266119",
+    "UPDATE_STATUS_TOPIC": "update_status",
+    "UPDATE_STATUS_ENDPOINT": "http://127.0.0.1:8000/session/status",
+    "UPDATE_SESSION_TOPIC": "update_session",
+    "UPDATE_SESSION_ENDPOINT": "http://127.0.0.1:8100/session/update",
+    "POST_PROCESS_TOPIC": "post_process",
+    "POST_PROCESS_ENDPOINT": "http://127.0.0.1:8400/process/analyze",
+    "BIND_ON": "0.0.0.0:8300"
+  }
+}
