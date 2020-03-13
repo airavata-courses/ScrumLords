@@ -19,7 +19,7 @@ spec:
       - image: {{ session_manager_image_name }}:{{- session_manager_version_tag }}
         imagePullPolicy: {{ session_manager_image_pull_policy }}
         ports:
-        - containerPort: 8000
+        - containerPort: 8100
           name: "session-manager"
           protocol: TCP
         name: "session-manager"

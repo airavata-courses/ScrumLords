@@ -1,28 +1,28 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "model-execution"
+  name: "weather-data-retrieval"
   namespace: {{ kube_namespace }}
   labels:
-    app: "model-execution"
+    app: "weather-data-retrieval"
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: "model-execution"
+      app: "weather-data-retrieval"
   template:
     metadata:
       labels:
-        app: "model-execution"
+        app: "weather-data-retrieval"
     spec:
       containers:
       - image: {{ model_execution_image_name }}:{{- model_execution_version_tag }}
         imagePullPolicy: {{ model_execution_image_pull_policy }}
         ports:
-        - containerPort: 8300
-          name: "model-execution"
+        - containerPort: 8200
+          name: "weather-data-retrieval"
           protocol: TCP
-        name: "model-execution"
+        name: "weather-data-retrieval"
         command: ["gunicorn", "-c", "gconf.py", "model_execution.wsgi"]
         env:
         {%- for item in model_execution_envs %}
