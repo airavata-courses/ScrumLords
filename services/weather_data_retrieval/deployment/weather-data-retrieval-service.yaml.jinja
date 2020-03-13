@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "weather-data-retrieval-svc"
+  name: "data-retrieval-svc"
   namespace: {{ kube_namespace }}
   labels:
-    app: "weather-data-retrieval"
+    app: "data-retrieval"
 spec:
   ports:
     - port: 8200
@@ -12,5 +12,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    run: "weather-data-retrieval"
+    run: "data-retrieval"
   type: "NodePort"

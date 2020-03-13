@@ -10,17 +10,17 @@ spec:
       paths:
       - path: /manager/*
         backend:
-          serviceName: "manager"
+          serviceName: "manager-svc"
           servicePort: 8000
       - path: /session_manager/*
         backend:
-          serviceName: "session-manager"
+          serviceName: "session-manager-svc"
           servicePort: 8100
       - path: /weather_data_retrieval/*
         backend:
-          serviceName: "weather-data-retrieval"
+          serviceName: "data-retrieval-svc"
           servicePort: 8200
       - path: /model_execution/*
         backend:
-          serviceName: "model-execution"
+          serviceName: "model-execution-svc"
           servicePort: 8300

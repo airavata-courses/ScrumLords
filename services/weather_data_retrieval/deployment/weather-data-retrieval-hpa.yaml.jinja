@@ -1,14 +1,14 @@
 apiVersion: "autoscaling/v2beta1"
 kind: "HorizontalPodAutoscaler"
 metadata:
-  name: "weather-data-retrieval-hpa"
+  name: "data-retrieval-hpa"
   namespace: {{ kube_namespace }}
   labels:
-    app: "weather-data-retrieval"
+    app: "data-retrieval"
 spec:
   scaleTargetRef:
     kind: "Deployment"
-    name: "weather-data-retrieval"
+    name: "data-retrieval"
     apiVersion: "apps/v1"
   minReplicas: 1
   maxReplicas: 5

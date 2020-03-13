@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 echo "Fetching cluster credentials..."
 gcloud container clusters get-credentials weather-forecast-cluster --zone us-central1-c --project weather-forecast-266119
 echo -e "Done.\n\n"

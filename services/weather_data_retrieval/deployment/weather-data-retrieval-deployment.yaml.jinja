@@ -1,28 +1,35 @@
 apiVersion: "apps/v1"
 kind: "Deployment"
 metadata:
-  name: "weather-data-retrieval"
+  name: "data-retrieval"
   namespace: {{ kube_namespace }}
   labels:
-    app: "weather-data-retrieval"
+    app: "data-retrieval"
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: "weather-data-retrieval"
+      app: "data-retrieval"
   template:
     metadata:
       labels:
-        app: "weather-data-retrieval"
+        app: "data-retrieval"
     spec:
       containers:
       - image: {{ weather_data_retrieval_image_name }}:{{- weather_data_retrieval_version_tag }}
         imagePullPolicy: {{ weather_data_retrieval_image_pull_policy }}
         ports:
         - containerPort: 8200
-          name: "weather-data-retrieval"
+          name: "data-retrieval"
           protocol: TCP
-        name: "weather-data-retrieval"
+        name: "data-retrieval"
+        livenessProbe:
+          httpGet:
+            path: /ht
+            port: 8200
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
         command: ["gunicorn", "-c", "gconf.py", "weather_data_retrieval.wsgi"]
         env:
         {%- for item in weather_data_retrieval_envs %}

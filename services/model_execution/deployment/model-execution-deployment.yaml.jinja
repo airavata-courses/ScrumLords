@@ -23,6 +23,13 @@ spec:
           name: "model-execution"
           protocol: TCP
         name: "model-execution"
+        livenessProbe:
+          httpGet:
+            path: /ht
+            port: 8300
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
         command: ["gunicorn", "-c", "gconf.py", "model_execution.wsgi"]
         env:
         {%- for item in model_execution_envs %}

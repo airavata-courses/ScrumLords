@@ -23,6 +23,13 @@ spec:
           name: "session-manager"
           protocol: TCP
         name: "session-manager"
+        livenessProbe:
+          httpGet:
+            path: /ht
+            port: 8100
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
         command: ["/bin/sh", "-c"]
         args: ["wget -O /session_manager/manager/firestore/pubsub-firestore-development.json https://www.dropbox.com/s/51l60y245m60nt1/pubsub-firestore-development.json?dl=1; gunicorn -c gconf.py session_manager.wsgi"]
         env:
