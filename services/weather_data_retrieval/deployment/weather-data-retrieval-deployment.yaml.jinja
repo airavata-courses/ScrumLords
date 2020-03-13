@@ -16,16 +16,16 @@ spec:
         app: "weather-data-retrieval"
     spec:
       containers:
-      - image: {{ model_execution_image_name }}:{{- model_execution_version_tag }}
-        imagePullPolicy: {{ model_execution_image_pull_policy }}
+      - image: {{ weather_data_retrieval_image_name }}:{{- weather_data_retrieval_version_tag }}
+        imagePullPolicy: {{ weather_data_retrieval_image_pull_policy }}
         ports:
         - containerPort: 8200
           name: "weather-data-retrieval"
           protocol: TCP
         name: "weather-data-retrieval"
-        command: ["gunicorn", "-c", "gconf.py", "model_execution.wsgi"]
+        command: ["gunicorn", "-c", "gconf.py", "weather_data_retrieval.wsgi"]
         env:
-        {%- for item in model_execution_envs %}
+        {%- for item in weather_data_retrieval_envs %}
         - name: {{ item }}
-          value: {{ model_execution_envs[item] }}
+          value: {{ weather_data_retrieval_envs[item] }}
         {%- endfor %}
