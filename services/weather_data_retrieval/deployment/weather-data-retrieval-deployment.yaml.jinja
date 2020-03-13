@@ -23,6 +23,13 @@ spec:
           name: "data-retrieval"
           protocol: TCP
         name: "data-retrieval"
+        readinessProbe:
+          httpGet:
+            path: /ht
+            port: 8200
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /ht

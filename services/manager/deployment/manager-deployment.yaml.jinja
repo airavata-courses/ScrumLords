@@ -23,6 +23,13 @@ spec:
           name: "manager"
           protocol: TCP
         name: "manager"
+        readinessProbe:
+          httpGet:
+            path: /ht
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /ht

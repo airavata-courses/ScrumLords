@@ -23,6 +23,13 @@ spec:
           name: "session-manager"
           protocol: TCP
         name: "session-manager"
+        readinessProbe:
+          httpGet:
+            path: /ht
+            port: 8100
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /ht

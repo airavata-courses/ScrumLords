@@ -23,6 +23,13 @@ spec:
           name: "model-execution"
           protocol: TCP
         name: "model-execution"
+        readinessProbe:
+          httpGet:
+            path: /ht
+            port: 8300
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
         livenessProbe:
           httpGet:
             path: /ht
