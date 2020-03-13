@@ -1,0 +1,32 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "session-manager"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "session-manager"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "session-manager"
+  template:
+    metadata:
+      labels:
+        app: "session-manager"
+    spec:
+      containers:
+      - image: {{ session_manager_image_name }}:{{- session_manager_version_tag }}
+        imagePullPolicy: {{ session_manager_image_pull_policy }}
+        ports:
+        - containerPort: 8000
+          name: "session-manager"
+          protocol: TCP
+        name: "session-manager"
+        command: ["/bin/sh", "-c"]
+        args: ["wget -O /session_manager/manager/firestore/pubsub-firestore-development.json https://www.dropbox.com/s/51l60y245m60nt1/pubsub-firestore-development.json?dl=1; gunicorn -c gconf.py session_manager.wsgi"]
+        env:
+        {%- for item in session_manager_envs %}
+        - name: {{ item }}
+          value: {{ session_manager_envs[item] }}
+        {%- endfor %}

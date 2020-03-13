@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: "manager-svc"
+  name: "session-manager-svc"
   namespace: {{ kube_namespace }}
   labels:
-    app: "manager"
+    app: "session-manager"
 spec:
   ports:
-    - port: 8000
-      targetPort: 8000
+    - port: 8100
+      targetPort: 8100
       protocol: TCP
       name: http
   selector:
-    run: "manager"
+    run: "session-manager"
   type: "NodePort"
