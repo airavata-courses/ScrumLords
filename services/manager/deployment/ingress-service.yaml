@@ -8,9 +8,17 @@ spec:
       paths:
       - path: /manager/*
         backend:
-          serviceName: manager
+          serviceName: "manager"
           servicePort: 8000
-#      - path: /model_execution/*
-#        backend:
-#          serviceName: model-execution
-#          servicePort: 8200
+      - path: /session_manager/*
+        backend:
+          serviceName: "session-manager"
+          servicePort: 8100
+      - path: /weather_data_retrieval/*
+        backend:
+          serviceName: "weather-data-retrieval"
+          servicePort: 8200
+      - path: /model_execution/*
+        backend:
+          serviceName: "model-execution"
+          servicePort: 8300

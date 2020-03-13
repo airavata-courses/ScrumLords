@@ -25,6 +25,7 @@ from api_manager.views.firestore_get import (
 from api_manager.views.session_create import start_session_pipeline
 from api_manager.views.session_get import get_all_sessions, get_session
 from api_manager.views.session_status import get_session_status, update_session_status
+from api_manager.views.health_check import health_check
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -36,4 +37,5 @@ urlpatterns = [
     url(r"^session/(?P<session_id>\w+)/history", get_retrieved_data),
     url(r"^session/(?P<session_id>\w+)/forecast", get_forecast_data),
     url(r"^session/(?P<session_id>\w+)/summary", get_processed_data),
+    url(r"^ht", health_check),
 ]
