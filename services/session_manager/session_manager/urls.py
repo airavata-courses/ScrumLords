@@ -20,7 +20,7 @@ from django.urls import path
 from manager.views.firestore_delete import delete_session
 from manager.views.firestore_save import save_session
 from manager.views.firestore_update import update_session
-from manager.views.health_check import health_check
+from manager.views.health_check import health_check, ready_check
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,4 +28,5 @@ urlpatterns = [
     path(r"session/update", update_session),
     path(r"session/delete", delete_session),
     url(r"^ht", health_check),
+    url(r"^", ready_check),
 ]

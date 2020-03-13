@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from ml_model.views.forecast import forecast_weather
-from ml_model.views.health_check import health_check
+from ml_model.views.health_check import health_check, ready_check
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("dark/forecast", forecast_weather),
     url(r"^ht", health_check),
+    url(r"^", ready_check),
 ]

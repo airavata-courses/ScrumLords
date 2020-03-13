@@ -6,3 +6,8 @@ from rest_framework.response import Response
 @api_view(["GET"])
 def health_check(request):
     return Response(status=status.HTTP_200_OK)
+
+
+@api_view(["GET"])
+def ready_check(request):
+    return Response(status=status.HTTP_200_OK)
