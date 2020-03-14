@@ -9,8 +9,8 @@ spec:
   ports:
     - port: 8100
       targetPort: 8100
-      protocol: TCP
+      protocol: "TCP"
       name: http
   selector:
-    run: "session-manager"
+    app: "session-manager"
   type: "NodePort"

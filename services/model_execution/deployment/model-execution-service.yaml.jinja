@@ -9,8 +9,8 @@ spec:
   ports:
     - port: 8300
       targetPort: 8300
-      protocol: TCP
+      protocol: "TCP"
       name: http
   selector:
-    run: "model-execution"
+    app: "model-execution"
   type: "NodePort"

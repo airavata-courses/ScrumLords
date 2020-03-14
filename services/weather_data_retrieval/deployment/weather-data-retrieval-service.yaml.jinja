@@ -9,8 +9,8 @@ spec:
   ports:
     - port: 8200
       targetPort: 8200
-      protocol: TCP
+      protocol: "TCP"
       name: http
   selector:
-    run: "data-retrieval"
+    app: "data-retrieval"
   type: "NodePort"
