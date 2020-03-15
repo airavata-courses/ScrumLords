@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 export DJANGO_ENV="development"
 export POSTGRES_USER="postgres"
 export POSTGRES_DB="wf_development"

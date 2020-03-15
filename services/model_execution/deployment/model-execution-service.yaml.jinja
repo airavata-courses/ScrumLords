@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "model-execution-svc"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "model-execution"
+spec:
+  ports:
+    - port: 8300
+      targetPort: 8300
+      protocol: "TCP"
+      name: http
+  selector:
+    app: "model-execution"
+  type: "NodePort"
