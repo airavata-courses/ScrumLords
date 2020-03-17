@@ -8,7 +8,6 @@ import {
     Container, Avatar, Button, CssBaseline, TextField, Link, Box, Grid, Typography
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import Img from '../../css/img/bg1.png'
 
 function Copyright() {
     return (
@@ -24,7 +23,7 @@ function Copyright() {
 
 const useStyles = makeStyles(theme => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(6),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -83,6 +82,7 @@ const Register = (props) => {
     };
 
     if (props.isAuthenticated) {
+        alert("Register Success!");
         return <Redirect to='/dashboard' />
     }
 
@@ -101,7 +101,7 @@ const Register = (props) => {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="fname"
-                                    name="firstName"
+                                    name="name"
                                     variant="outlined"
                                     required
                                     fullWidth

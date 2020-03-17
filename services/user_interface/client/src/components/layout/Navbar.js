@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth'
-import {
-    AppBar, Toolbar, Typography, Grid
-} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -22,26 +18,20 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-
-
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
-
     const classes = useStyles();
-
     const authLinks = (
         <Fragment>
             <div className="ui inverted segment">
                 <div className="ui inverted secondary pointing large menu">
                     <Link to='/dashboard' className="item">Dashboard</Link>
                     <Link to='/sessions' className="item">Jobs</Link>
-
                     <div className="right menu">
                         <a className="item" onClick={logout} href="/">Logout</a>
                     </div>
                 </div>
             </div>
         </Fragment>
-
     )
 
     const guestLinks = (
