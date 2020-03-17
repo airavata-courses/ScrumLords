@@ -36,8 +36,8 @@ public class Postprocessor implements PostProcessService {
 
   private final HelloPubSubPublisher publisher;
 
-  @Value("${spring.cloud.gcp.pubsub.emulator-host}")
-  private String hostportvalue;
+  //@Value("${spring.cloud.gcp.pubsub.emulator-host}")
+  //private String hostportvalue;
 
   @Value("${spring.cloud.gcp.project-id}")
   private String projectid;
@@ -48,8 +48,8 @@ public class Postprocessor implements PostProcessService {
   @Value("${spring.cloud.gcp.topic-id-api-manager}")
   private String topicIdApiManager;
 
-  @Value("${spring.cloud.gcp.topic-id-test}")
-  private String topicIdTest;
+  //@Value("${spring.cloud.gcp.topic-id-test}")
+  //private String topicIdTest;
 
   @Autowired
   public Postprocessor(HelloPubSubPublisher publisher) {
@@ -243,10 +243,10 @@ public class Postprocessor implements PostProcessService {
 
       System.out.println("Sending messages to pubsub");
 
-      String hostport = hostportvalue;
-      ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
+      //String hostport = hostportvalue;
+      //ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
       try {
-
+/*
         TransportChannelProvider channelProvider =
             FixedTransportChannelProvider.create(GrpcTransportChannel.create(channel));
         CredentialsProvider credentialsProvider = NoCredentialsProvider.create();
@@ -259,23 +259,17 @@ public class Postprocessor implements PostProcessService {
                     .setTransportChannelProvider(channelProvider)
                     .setCredentialsProvider(credentialsProvider)
                     .build());
-
+*/
         ProjectTopicName topicNameForApiManager = ProjectTopicName.of(projectid, topicIdApiManager);
         ProjectTopicName topicNameForSessionManager =
             ProjectTopicName.of(projectid, topicIdSessionManager);
         // Set the channel and credentials provider when creating a `Publisher`.
         // Similarly for Subscriber
         Publisher publisherForApiManager =
-            Publisher.newBuilder(topicNameForApiManager)
-                .setChannelProvider(channelProvider)
-                .setCredentialsProvider(credentialsProvider)
-                .build();
+            Publisher.newBuilder(topicNameForApiManager).build();
 
         Publisher publisherForSessionManager =
-            Publisher.newBuilder(topicNameForSessionManager)
-                .setChannelProvider(channelProvider)
-                .setCredentialsProvider(credentialsProvider)
-                .build();
+            Publisher.newBuilder(topicNameForSessionManager).build();
 
         String topic = publisherForApiManager.getTopicNameString();
 

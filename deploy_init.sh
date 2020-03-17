@@ -22,3 +22,9 @@ echo -e "\n\nCreating services, deployments and horizontal pod autoscalers from 
 j2 services/model_execution/deployment/model-execution-service.yaml.jinja services/model_execution/deployment/production_jinja.json --format=json | kubectl apply -f -
 j2 services/model_execution/deployment/model-execution-deployment.yaml.jinja services/model_execution/deployment/production_jinja.json --format=json | kubectl apply -f -
 j2 services/model_execution/deployment/model-execution-hpa.yaml.jinja services/model_execution/deployment/production_jinja.json --format=json | kubectl apply -f -
+
+
+echo -e "\n\nCreating services, deployments and horizontal pod autoscalers from jinja templates for postprocessor microservice..."
+j2 services/postprocessor/deployment/postprocessor-service.yaml.jinja services/postprocessor/deployment/production_jinja.json --format=json | kubectl apply -f -
+j2 services/postprocessor/deployment/postprocessor-deployment.yaml.jinja services/postprocessor/deployment/production_jinja.json --format=json | kubectl apply -f -
+j2 services/postprocessor/deployment/postprocessor-hpa.yaml.jinja services/postprocessor/deployment/production_jinja.json --format=json | kubectl apply -f -
