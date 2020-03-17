@@ -1,8 +1,8 @@
 {
   "minikube": false,
   "kube_namespace": "default",
-  "loadBalancerIp": "55.324.34.222",
-  "loadBalancerUrl": "api.weather.forecast.com",
+  "loadBalancerIp": "35.238.62.222",
+  "loadBalancerUrl": "api.bobbyrathore.com",
   "model_execution_image_pull_policy": "Always",
   "model_execution_version_tag": "init",
   "model_execution_image_name": "gcr.io/weather-forecast-266119/model_execution",

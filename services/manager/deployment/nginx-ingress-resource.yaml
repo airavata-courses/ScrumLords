@@ -42,5 +42,5 @@ spec:
 #    http:
 #      paths:
 #        - backend:
-#            serviceName: "postprocessor-execution-svc"
+#            serviceName: "postprocessor-svc"
 #            servicePort: 8400

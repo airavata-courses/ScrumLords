@@ -1,0 +1,14 @@
+{
+  "minikube": false,
+  "kube_namespace": "default",
+  "loadBalancerIp": "35.238.62.222",
+  "loadBalancerUrl": "api.bobbyrathore.com",
+  "manager_image_pull_policy": "Always",
+  "manager_version_tag": "init",
+  "manager_image_name": "gcr.io/weather-forecast-266119/postprocessor",
+  "manager_envs": {
+    "PUBSUB_PROJECT_ID": "weather-forecast-266119",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/postprocessor/deployment/pubsub-firestore-development.json",
+    "BIND_ON": "0.0.0.0:8400"
+  }
+}
