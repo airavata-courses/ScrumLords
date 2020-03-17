@@ -9,14 +9,14 @@
   "model_execution_envs": {
     "DJANGO_ENV": "development",
     "DARK_SKY_API_KEY": "6f6ba60da918163a0ad9753222977026",
-    "PUBSUB_EMULATOR_HOST": "localhost:8085",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
+    "REDIS_HOST": "redis://falling-clownfish-redis-ha.default.svc.cluster.local:6379",
     "UPDATE_STATUS_TOPIC": "update_status",
-    "UPDATE_STATUS_ENDPOINT": "http://127.0.0.1:8000/session/status",
+    "UPDATE_STATUS_ENDPOINT": "http://35.190.121.111/manager/session/status",
     "UPDATE_SESSION_TOPIC": "update_session",
-    "UPDATE_SESSION_ENDPOINT": "http://127.0.0.1:8100/session/update",
+    "UPDATE_SESSION_ENDPOINT": "http://35.190.121.111/session_manager/session/update",
     "POST_PROCESS_TOPIC": "post_process",
-    "POST_PROCESS_ENDPOINT": "http://127.0.0.1:8400/process/analyze",
+    "POST_PROCESS_ENDPOINT": "http://35.190.121.111/postprocessor/process/analyze",
     "BIND_ON": "0.0.0.0:8300"
   }
 }
