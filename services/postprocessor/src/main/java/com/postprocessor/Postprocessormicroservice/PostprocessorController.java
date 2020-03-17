@@ -39,4 +39,17 @@ public class PostprocessorController {
 
     return new ResponseEntity<>("Job Submitted", HttpStatus.OK);
   }
+
+  @RequestMapping(value = "/ht", method = RequestMethod.GET)
+  public ResponseEntity<?> healthcheck() {
+	  return new ResponseEntity<>(HttpStatus.OK);
+
+  }
+
+  @RequestMapping(value = "/", method = RequestMethod.GET)
+  public ResponseEntity<?> rt() {
+	  return new ResponseEntity<>(HttpStatus.OK);
+
+  }
+
 }
