@@ -34,7 +34,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class Postprocessor implements PostProcessService {
 
-  private final HelloPubSubPublisher publisher;
+  //private final HelloPubSubPublisher publisher;
 
   //@Value("${spring.cloud.gcp.pubsub.emulator-host}")
   //private String hostportvalue;
@@ -51,10 +51,10 @@ public class Postprocessor implements PostProcessService {
   //@Value("${spring.cloud.gcp.topic-id-test}")
   //private String topicIdTest;
 
-  @Autowired
-  public Postprocessor(HelloPubSubPublisher publisher) {
-    this.publisher = publisher;
-  }
+ // @Autowired
+ // public Postprocessor(HelloPubSubPublisher publisher) {
+  //  this.publisher = publisher;
+  //}
 
   // @Async
   @Override
