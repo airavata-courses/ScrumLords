@@ -1,0 +1,26 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "user-interface"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "user-interface"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "user-interface"
+  template:
+    metadata:
+      labels:
+        app: "user-interface"
+    spec:
+      containers:
+      - image: {{ user_interface_image_name }}:{{- user_interface_version_tag }}
+        imagePullPolicy: {{ user_interface_image_pull_policy }}
+        ports:
+        - containerPort: 3000
+          name: "user-interface"
+          protocol: TCP
+        name: "user-interface"
+        command: ["npm", "start"]
