@@ -38,9 +38,9 @@ spec:
         - backend:
             serviceName: "model-execution-svc"
             servicePort: 8300
-#  - host: postprocessor.bobbyrathore.com
-#    http:
-#      paths:
-#        - backend:
-#            serviceName: "postprocessor-svc"
-#            servicePort: 8400
+  - host: postprocessor.bobbyrathore.com
+    http:
+      paths:
+        - backend:
+            serviceName: "postprocessor-svc"
+            servicePort: 8400
