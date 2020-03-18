@@ -13,8 +13,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="#">
-                Weather-io
+            <Link color="inherit" href="https://github.com/airavata-courses/ScrumLords">
+                ScrumLords
       </Link>{' '}
             {new Date().getFullYear()}
             {'.'}
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
     form: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(4),
+        marginTop: theme.spacing(7),
     },
     submit: {
         background: '#5e5e5e',
@@ -96,7 +96,7 @@ const Login = (props) => {
                 <Avatar className={classes.avatar}>
                 </Avatar>
                 <Typography component="h1" variant="h6" className={classes.header} color="textSecondary">
-                    Welcome to Weather-io
+                    ScrumLords - Weather
                 </Typography>
                 <form className={classes.form} onSubmit={e => onSubmit(e)}>
                     <TextField
