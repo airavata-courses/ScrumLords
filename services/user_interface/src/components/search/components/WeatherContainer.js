@@ -79,7 +79,7 @@ export const WeatherContainer = () => {
                     };
                     const body = JSON.stringify({ user_id, city_id });
                     // for sending response 
-                    const res = await axios.post('http://localhost:8000/session/create', body, config);
+                    const res = await axios.post('https://manager.bobbyrathore.com/session/create', body, config);
                     console.log(res);
                     window.alert('Job Submitted')
 

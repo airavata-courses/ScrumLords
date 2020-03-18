@@ -9,7 +9,7 @@ const SessionContainer = () => {
             try {
                 const user = await axios.get('/api/auth');
                 const user_id = user.data._id;
-                const res = await axios.get(`http://localhost:8000/user/${user_id}/sessions`)
+                const res = await axios.get(`https://manager.bobbyrathore.com/user/${user_id}/sessions`)
                 const res_data = res.data.data
                 console.log(res_data)
 
@@ -35,7 +35,7 @@ const SessionContainer = () => {
 
     const getHistory = async (session) => {
         const session_id = session.id
-        const weather_history = await axios.get(`http://localhost:8000/session/${session_id}/get`)
+        const weather_history = await axios.get(`https://manager.bobbyrathore.com/session/${session_id}/history`)
         let json = JSON.stringify(weather_history.data.data)
         json = json.replace(/,"/g, ',\n"');
         let tab = window.open('about:blank', '_blank');
@@ -45,7 +45,7 @@ const SessionContainer = () => {
 
     const getForecast = async (session) => {
         const session_id = session.id
-        const weather_forecast = await axios.get(`http://localhost:8000/session/${session_id}/forecast`)
+        const weather_forecast = await axios.get(`https://manager.bobbyrathore.com/session/${session_id}/forecast`)
         let json = JSON.stringify(weather_forecast.data.data)
         json = json.replace(/,"/g, ',\n"');
         let tab = window.open('about:blank', '_blank');
@@ -56,7 +56,7 @@ const SessionContainer = () => {
 
     const getSummary = async (session) => {
         const session_id = session.id
-        const weather_summary = await axios.get(`http://localhost:8000/session/${session_id}/summary`)
+        const weather_summary = await axios.get(`https://manager.bobbyrathore.com/session/${session_id}/summary`)
         let json = JSON.stringify(weather_summary.data.data)
         json = json.replace(/\\n/g, '\n');
         let tab = window.open('about:blank', '_blank');
