@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import WeatherInfo from './WeatherInfo';
 import axios from 'axios'
 
 export const WeatherContainer = () => {
@@ -7,12 +6,15 @@ export const WeatherContainer = () => {
     const API_KEY = '4c3f87318d7dda9dbf7b495c8c670333'
     const [searchQuery1, setSearchQuery1] = useState();
     const [searchQuery2, setSearchQuery2] = useState();
+
+    /*
     const [weatherData, setWeatherData] = useState({
         temp: null,
         humidity: null,
         desc: null,
         city: null
     })
+    */
 
     const updateSearch1 = e => {
         setSearchQuery1(e.target.value);
@@ -61,17 +63,9 @@ export const WeatherContainer = () => {
             .then(async data => {
 
                 try {
-                    const user = await axios.get('/api/auth');
+                    const user = await axios.get('https://userserver.bobbyrathore.com/api/auth');
                     const user_id = user.data._id
                     let city_id = data.id;
-                    setWeatherData({
-                        temp: data.main.temp,
-                        humidity: data.main.humidity,
-                        desc: data.weather[0].main,
-                        city: data.name
-                    })
-                    console.log(data)
-
                     const config = {
                         headers: {
                             'Content-Type': 'application/json'
@@ -79,9 +73,9 @@ export const WeatherContainer = () => {
                     };
                     const body = JSON.stringify({ user_id, city_id });
                     // for sending response 
-                    const res = await axios.post('http://localhost:8000/session/create', body, config);
+                    const res = await axios.post('https://manager.bobbyrathore.com/session/create', body, config);
                     console.log(res);
-                    window.alert('Job Submitted')
+                    alert('Job Submitted')
 
                 } catch (err) {
                     console.log(err);

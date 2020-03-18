@@ -37,7 +37,7 @@ spec:
             scheme: HTTP
           initialDelaySeconds: 30
           timeoutSeconds: 5
-        command: ["java", "-jar", "/app.jar"]
+        command: ["./mvnw", "spring-boot:run"]
         env:
         {%- for item in postprocessor_envs %}
         - name: {{ item }}

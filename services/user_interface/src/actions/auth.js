@@ -10,7 +10,7 @@ export const loadUser = () => async dispatch => {
     }
 
     try {
-        const res = await axios.get('/api/auth');
+        const res = await axios.get('https://userserver.bobbyrathore.com/api/auth');
         dispatch({
             type: USER_LOADED,
             payload: res.data
@@ -35,7 +35,7 @@ export const register = ({ name, email, password }) => async dispatch => {
 
     try {
         // for sending response 
-        const res = await axios.post('/api/users', body, config);
+        const res = await axios.post('https://userserver.bobbyrathore.com/api/users', body, config);
 
         // if no error 
         dispatch({
@@ -69,7 +69,7 @@ export const login = (email, password) => async dispatch => {
 
     try {
         // for sending response 
-        const res = await axios.post('/api/auth', body, config);
+        const res = await axios.post('https://userserver.bobbyrathore.com/api/auth', body, config);
 
         // if no error 
         dispatch({
