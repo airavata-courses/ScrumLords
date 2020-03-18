@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "weather-forecast-266119",
+  "private_key_id": "71ef230bbb6bb470c9844a42c4def996958c5065",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCtJRwEaUEElnkI\nAgbx+1uy9BOsO5iTYwKxlbAyzhnr3/YviYhsl53aDIlKegmxYIcAApFVCNdD5R8z\nc+5Vwj0resENRAJyLCgNclayEioChKrTzz5xmSLC90kHxLKGy5lGKijfWiceGCt8\niUndehDt8+vFCUxScBYFv8bSnHZckSAd2A7SkJCOea73DCs0D/aCp7jZiH2Jxb5h\nEv0PQHY53nJqNoAeDFgcWpHy2dKAJZ4V7w/NysHb5eOH2BrBP4ERhi7lvDFf9wh7\nd1tDO9TuaPUe9o+iZ8fnOMkWTbJ3P6COCzJPiGCwaVJKfPxn4fUWrCd2F+eTbkDr\nVJx/ejThAgMBAAECggEAINtvtWuW7cyzU6B02nNhi7RzTkYx9lg98N7P5NhFRYSH\nBq7iD393MmOaIyLFF57Sh581Hq6ykR0YHm7D3gziCE//dim/kBSOljyqNJkrVTaB\nZ3gG6M5PcTG1r251lYxp/g1um7ITRcv+5p9z/75UG5/kEExrKiLAnx8tVxbfhEGq\n7CfH1WjLm1DL+22TMAx3AwCufogVU8Cc3NIKvFxkDlNTv0Gti8N2qJRgqFWNExxx\ngUClNJdzhMz2Ss8s8g6rjVBAoc7xLGncWXTQRDtlUqo9ieMuUFysrg8GYx0L7fjD\nBr96nJrWinr2gaypFGKM5iqgI7g0mck50jCTxZBBxQKBgQDkS/Zq5lLdKOTANH2u\naG8gVHJ+HdX3MzjO8LxEov6qdBp8gL0xIQsDzz4oh2qDSgh6TjOOs1JMBcnVlDsX\nvkQW6fh/WgkwTanu2nsPLPoqtrls0wGG1iydrNSmeBoZaggEMdBF2SuruByRqFxi\nc+hn2OCehP/VNDO3eZ5Adlju7QKBgQDCJ9t0e5N9dChHOI3Y1GzDO8OFyfc6L2vZ\nW8mVf6ugQM9GdhNSwaPqNFZTWV4vbmaczk0DuxCduSiKwhASa1NwyG7WGo0/gZa1\ncxRbAm+OYE6kzEjZUc1L0Q7MsRQeX/TZ7BEmqY5TwTN7BR+XuU6qoD5Q8Mx660lt\nZRYHwuArRQKBgHGIlXN0N6FkxN4RPK+PoDQjywyNKetVvdqsPfSkWqHKO6HPJEda\nd2/dkLv3HDFOkAjC+0DsTPEhr85XeUvFg3chxEMRM6Ch/vCaFrjlVUQIuw4zoX68\n5FNFsDtZXyFkabgsTbdu2Rj85rhJUihkHCAI6yvqWJBe9Zk5EkpckL3BAoGBAJlj\nY71i4+L5IdkilO345PRZAt9v8CHH1Syjl17EvpKcoSTJo/p9gUJGluzCbeaLEgZP\n9gg8gaQZ5C27o3bp08IGl4oO8Ah8GNTBVhOQmRGihH8t5V/LgKWlREvymjJlHMwN\n9H7W9dq1iDZolc0IWV3zu0e29dUmjZwfgIghLXkBAoGBALuftdRdS8ySuK7XE3fH\nIFso70Y3MiwlFgpDJdVvjH4p9nkCrLSbxH09B2vPpwK8qVlabBLczezVzPbwHalE\nJSU1g/fCaAJsXM3/OAFSs/PYCXiDvfOwDRsvCBPnZdpyFkiYa/2J/7W17JBE1/4c\n/Wdhj5F3iRl470T7vk/SN7SL\n-----END PRIVATE KEY-----\n",
+  "client_email": "weather-forecast-266119@appspot.gserviceaccount.com",
+  "client_id": "111212356754813284071",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/weather-forecast-266119%40appspot.gserviceaccount.com"
+}

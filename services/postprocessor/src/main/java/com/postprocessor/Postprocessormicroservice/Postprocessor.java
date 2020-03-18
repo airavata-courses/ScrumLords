@@ -28,6 +28,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gcp.core.DefaultCredentialsProvider;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -243,13 +244,15 @@ public class Postprocessor implements PostProcessService {
 
       System.out.println("Sending messages to pubsub");
 
-      //String hostport = hostportvalue;
+      //String hostport = "localhost";
       //ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
       try {
 /*
         TransportChannelProvider channelProvider =
             FixedTransportChannelProvider.create(GrpcTransportChannel.create(channel));
         CredentialsProvider credentialsProvider = NoCredentialsProvider.create();
+        //DefaultCredentialsProvider credentialsProvider = null;
+        //credentialsProvider.getCredentials();
 
         // Set the channel and credentials provider when creating a `TopicAdminClient`.
         // Similarly for SubscriptionAdminClient
@@ -266,10 +269,16 @@ public class Postprocessor implements PostProcessService {
         // Set the channel and credentials provider when creating a `Publisher`.
         // Similarly for Subscriber
         Publisher publisherForApiManager =
-            Publisher.newBuilder(topicNameForApiManager).build();
+            Publisher.newBuilder(topicNameForApiManager)
+            //.setChannelProvider(channelProvider)
+           // .setCredentialsProvider(credentialsProvider)
+            .build();
 
         Publisher publisherForSessionManager =
-            Publisher.newBuilder(topicNameForSessionManager).build();
+            Publisher.newBuilder(topicNameForSessionManager)
+            //.setChannelProvider(channelProvider)
+            //.setCredentialsProvider(credentialsProvider)
+            .build();
 
         String topic = publisherForApiManager.getTopicNameString();
 
