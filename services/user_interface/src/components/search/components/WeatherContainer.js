@@ -63,7 +63,7 @@ export const WeatherContainer = () => {
             .then(async data => {
 
                 try {
-                    const user = await axios.get('/api/auth');
+                    const user = await axios.get('https://userserver.bobbyrathore.com/api/auth');
                     const user_id = user.data._id
                     let city_id = data.id;
                     const config = {
@@ -75,7 +75,7 @@ export const WeatherContainer = () => {
                     // for sending response 
                     const res = await axios.post('https://manager.bobbyrathore.com/session/create', body, config);
                     console.log(res);
-                    window.alert('Job Submitted')
+                    alert('Job Submitted')
 
                 } catch (err) {
                     console.log(err);

@@ -7,7 +7,7 @@ const SessionContainer = () => {
     useEffect(() => {
         async function getSessionData() {
             try {
-                const user = await axios.get('/api/auth');
+                const user = await axios.get('https://userserver.bobbyrathore.com/api/auth');
                 const user_id = user.data._id;
                 const res = await axios.get(`https://manager.bobbyrathore.com/user/${user_id}/sessions`)
                 const res_data = res.data.data
