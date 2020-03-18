@@ -8,7 +8,7 @@
   "postprocessor_image_name": "gcr.io/weather-forecast-266119/postprocessor",
   "postprocessor_envs": {
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
-    "GOOGLE_APPLICATION_CREDENTIALS": "/postprocessor/deployment/pubsub-firestore-development.json",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/postprocessor/src/main/resources/pubsub-firestore-development.json",
     "BIND_ON": "0.0.0.0:8400"
   }
 }
