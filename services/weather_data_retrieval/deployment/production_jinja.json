@@ -1,22 +1,22 @@
 {
   "minikube": false,
   "kube_namespace": "default",
-  "loadBalancerIp": "55.324.34.222",
-  "loadBalancerUrl": "api.weather.forecast.com",
+  "loadBalancerIp": "35.238.62.222",
+  "loadBalancerUrl": "api.bobbyrathore.com",
   "weather_data_retrieval_image_pull_policy": "Always",
   "weather_data_retrieval_version_tag": "init",
   "weather_data_retrieval_image_name": "gcr.io/weather-forecast-266119/weather_data_retrieval",
   "weather_data_retrieval_envs": {
     "DJANGO_ENV": "development",
     "DARK_SKY_API_KEY": "6f6ba60da918163a0ad9753222977026",
-    "PUBSUB_EMULATOR_HOST": "localhost:8085",
+    "REDIS_HOST": "redis://scrumlords-weather-redis-ha.default.svc.cluster.local:6379",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
     "MODEL_EXECUTE_TOPIC": "model_execute",
-    "MODEL_EXECUTE_ENDPOINT": "http://127.0.0.1:8300/dark/forecast",
+    "MODEL_EXECUTE_ENDPOINT": "https://model.bobbyrathore.com/dark/forecast",
     "UPDATE_STATUS_TOPIC": "update_status",
-    "UPDATE_STATUS_ENDPOINT": "http://127.0.0.1:8000/session/status",
+    "UPDATE_STATUS_ENDPOINT": "https://manager.bobbyrathore.com/session/status",
     "UPDATE_SESSION_TOPIC": "update_session",
-    "UPDATE_SESSION_ENDPOINT": "http://127.0.0.1:8100/session/update",
+    "UPDATE_SESSION_ENDPOINT": "https://session.bobbyrathore.com/session/update",
     "BIND_ON": "0.0.0.0:8200"
   }
 }

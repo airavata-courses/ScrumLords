@@ -1,0 +1,26 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "user-server"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "user-server"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "user-server"
+  template:
+    metadata:
+      labels:
+        app: "user-server"
+    spec:
+      containers:
+      - image: {{ user_server_image_name }}:{{- user_server_version_tag }}
+        imagePullPolicy: {{ user_server_image_pull_policy }}
+        ports:
+        - containerPort: 5000
+          name: "user-server"
+          protocol: TCP
+        name: "user-server"
+        command: ["npm", "start"]

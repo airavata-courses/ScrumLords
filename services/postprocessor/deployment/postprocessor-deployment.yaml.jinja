@@ -1,0 +1,45 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "postprocessor"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "postprocessor"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "postprocessor"
+  template:
+    metadata:
+      labels:
+        app: "postprocessor"
+    spec:
+      containers:
+      - image: {{ postprocessor_image_name }}:{{- postprocessor_version_tag }}
+        imagePullPolicy: {{ postprocessor_image_pull_policy }}
+        ports:
+        - containerPort: 8400
+          name: "postprocessor"
+          protocol: TCP
+        name: "postprocessor"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8400
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /ht
+            port: 8400
+            scheme: HTTP
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+        command: ["./mvnw", "spring-boot:run"]
+        env:
+        {%- for item in postprocessor_envs %}
+        - name: {{ item }}
+          value: {{ postprocessor_envs[item] }}
+        {%- endfor %}

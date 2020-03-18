@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: "user-server-svc"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "user-server"
+spec:
+  ports:
+    - port: 5000
+      targetPort: 5000
+      protocol: "TCP"
+      name: http
+  selector:
+    app: "user-server"
+  type: "NodePort"

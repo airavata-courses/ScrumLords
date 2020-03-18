@@ -28,16 +28,17 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gcp.core.DefaultCredentialsProvider;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
 public class Postprocessor implements PostProcessService {
 
-  private final HelloPubSubPublisher publisher;
+  //private final HelloPubSubPublisher publisher;
 
-  @Value("${spring.cloud.gcp.pubsub.emulator-host}")
-  private String hostportvalue;
+  //@Value("${spring.cloud.gcp.pubsub.emulator-host}")
+  //private String hostportvalue;
 
   @Value("${spring.cloud.gcp.project-id}")
   private String projectid;
@@ -48,13 +49,13 @@ public class Postprocessor implements PostProcessService {
   @Value("${spring.cloud.gcp.topic-id-api-manager}")
   private String topicIdApiManager;
 
-  @Value("${spring.cloud.gcp.topic-id-test}")
-  private String topicIdTest;
+  //@Value("${spring.cloud.gcp.topic-id-test}")
+  //private String topicIdTest;
 
-  @Autowired
-  public Postprocessor(HelloPubSubPublisher publisher) {
-    this.publisher = publisher;
-  }
+ // @Autowired
+ // public Postprocessor(HelloPubSubPublisher publisher) {
+  //  this.publisher = publisher;
+  //}
 
   // @Async
   @Override
@@ -243,13 +244,15 @@ public class Postprocessor implements PostProcessService {
 
       System.out.println("Sending messages to pubsub");
 
-      String hostport = hostportvalue;
-      ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
+      //String hostport = "localhost";
+      //ManagedChannel channel = ManagedChannelBuilder.forTarget(hostport).usePlaintext().build();
       try {
-
+/*
         TransportChannelProvider channelProvider =
             FixedTransportChannelProvider.create(GrpcTransportChannel.create(channel));
         CredentialsProvider credentialsProvider = NoCredentialsProvider.create();
+        //DefaultCredentialsProvider credentialsProvider = null;
+        //credentialsProvider.getCredentials();
 
         // Set the channel and credentials provider when creating a `TopicAdminClient`.
         // Similarly for SubscriptionAdminClient
@@ -259,7 +262,7 @@ public class Postprocessor implements PostProcessService {
                     .setTransportChannelProvider(channelProvider)
                     .setCredentialsProvider(credentialsProvider)
                     .build());
-
+*/
         ProjectTopicName topicNameForApiManager = ProjectTopicName.of(projectid, topicIdApiManager);
         ProjectTopicName topicNameForSessionManager =
             ProjectTopicName.of(projectid, topicIdSessionManager);
@@ -267,15 +270,15 @@ public class Postprocessor implements PostProcessService {
         // Similarly for Subscriber
         Publisher publisherForApiManager =
             Publisher.newBuilder(topicNameForApiManager)
-                .setChannelProvider(channelProvider)
-                .setCredentialsProvider(credentialsProvider)
-                .build();
+            //.setChannelProvider(channelProvider)
+           // .setCredentialsProvider(credentialsProvider)
+            .build();
 
         Publisher publisherForSessionManager =
             Publisher.newBuilder(topicNameForSessionManager)
-                .setChannelProvider(channelProvider)
-                .setCredentialsProvider(credentialsProvider)
-                .build();
+            //.setChannelProvider(channelProvider)
+            //.setCredentialsProvider(credentialsProvider)
+            .build();
 
         String topic = publisherForApiManager.getTopicNameString();
 
