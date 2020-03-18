@@ -1,0 +1,19 @@
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "postprocessor-hpa"
+  namespace: {{ kube_namespace }}
+  labels:
+    app: "postprocessor"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "postprocessor"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80
