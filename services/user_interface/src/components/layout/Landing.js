@@ -2,7 +2,6 @@ import React from 'react';
 import { Grid, CssBaseline, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import Login from '../auth/Login';
-import Navbar from '../layout/Navbar';
 import Img1 from '../../css/img/undraw1.svg';
 import Img2 from '../../css/img/bg1.png'
 

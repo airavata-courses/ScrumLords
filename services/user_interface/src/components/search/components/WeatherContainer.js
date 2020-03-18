@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import WeatherInfo from './WeatherInfo';
 import axios from 'axios'
 
 export const WeatherContainer = () => {
@@ -7,12 +6,15 @@ export const WeatherContainer = () => {
     const API_KEY = '4c3f87318d7dda9dbf7b495c8c670333'
     const [searchQuery1, setSearchQuery1] = useState();
     const [searchQuery2, setSearchQuery2] = useState();
+
+    /*
     const [weatherData, setWeatherData] = useState({
         temp: null,
         humidity: null,
         desc: null,
         city: null
     })
+    */
 
     const updateSearch1 = e => {
         setSearchQuery1(e.target.value);
@@ -64,14 +66,6 @@ export const WeatherContainer = () => {
                     const user = await axios.get('/api/auth');
                     const user_id = user.data._id
                     let city_id = data.id;
-                    setWeatherData({
-                        temp: data.main.temp,
-                        humidity: data.main.humidity,
-                        desc: data.weather[0].main,
-                        city: data.name
-                    })
-                    console.log(data)
-
                     const config = {
                         headers: {
                             'Content-Type': 'application/json'

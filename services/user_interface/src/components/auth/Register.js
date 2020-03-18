@@ -8,7 +8,6 @@ import {
     Container, Avatar, Button, CssBaseline, TextField, Link, Box, Grid, Typography
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
-import Img from '../../css/img/bg1.png'
 
 function Copyright() {
     return (
@@ -101,7 +100,7 @@ const Register = (props) => {
                             <Grid item xs={12} sm={6}>
                                 <TextField
                                     autoComplete="fname"
-                                    name="firstName"
+                                    name="name"
                                     variant="outlined"
                                     required
                                     fullWidth
