@@ -12,6 +12,7 @@ spec:
         - session.bobbyrathore.com
         - retrieval.bobbyrathore.com
         - model.bobbyrathore.com
+        - postprocessor.bobbyrathore.com
         - userserver.bobbyrathore.com
         - scrumlordsweather.bobbyrathore.com
       secretName: bobbyrathore-tls
@@ -40,12 +41,12 @@ spec:
         - backend:
             serviceName: "model-execution-svc"
             servicePort: 8300
-#  - host: postprocessor.bobbyrathore.com
-#    http:
-#      paths:
-#        - backend:
-#            serviceName: "postprocessor-svc"
-#            servicePort: 8400
+  - host: postprocessor.bobbyrathore.com
+    http:
+      paths:
+        - backend:
+            serviceName: "postprocessor-svc"
+            servicePort: 8400
   - host: userserver.bobbyrathore.com
     http:
       paths:

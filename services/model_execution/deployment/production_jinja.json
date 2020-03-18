@@ -10,7 +10,7 @@
     "DJANGO_ENV": "development",
     "DARK_SKY_API_KEY": "6f6ba60da918163a0ad9753222977026",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
-    "REDIS_HOST": "redis://falling-clownfish-redis-ha.default.svc.cluster.local:6379",
+    "REDIS_HOST": "redis://scrumlords-weather-redis-ha.default.svc.cluster.local:6379",
     "UPDATE_STATUS_TOPIC": "update_status",
     "UPDATE_STATUS_ENDPOINT": "https://manager.bobbyrathore.com/session/status",
     "UPDATE_SESSION_TOPIC": "update_session",

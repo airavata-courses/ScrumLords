@@ -5,5 +5,5 @@
   "loadBalancerUrl": "api.bobbyrathore.com",
   "user_server_image_pull_policy": "Always",
   "user_server_version_tag": "init",
-  "user_server_image_name": "gcr.io/weather-forecast-266119/user-server"
+  "user_server_image_name": "gcr.io/weather-forecast-266119/user_server"
 }
