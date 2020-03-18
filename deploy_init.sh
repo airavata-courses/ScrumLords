@@ -36,3 +36,8 @@ j2 services/user_server/deployment/user-server-deployment.yaml.jinja services/us
 j2 services/user_server/deployment/user-server-hpa.yaml.jinja services/user_server/deployment/production_jinja.json --format=json | kubectl apply -f -
 
 
+echo -e "\n\nCreating services, deployments and horizontal pod autoscalers from jinja templates for user_server microservice..."
+j2 services/user_interface/deployment/user-interface-service.yaml.jinja services/user_interface/deployment/production_jinja.json --format=json | kubectl apply -f -
+j2 services/user_interface/deployment/user-interface-deployment.yaml.jinja services/user_interface/deployment/production_jinja.json --format=json | kubectl apply -f -
+j2 services/user_interface/deployment/user-interface-hpa.yaml.jinja services/user_interface/deployment/production_jinja.json --format=json | kubectl apply -f -
+

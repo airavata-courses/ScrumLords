@@ -13,6 +13,7 @@ spec:
         - retrieval.bobbyrathore.com
         - model.bobbyrathore.com
         - userserver.bobbyrathore.com
+        - scrumlordsweather.bobbyrathore.com
       secretName: bobbyrathore-tls
   rules:
   - host: manager.bobbyrathore.com
@@ -51,3 +52,9 @@ spec:
         - backend:
             serviceName: "user-server-svc"
             servicePort: 5000
+  - host: scrumlordsweather.bobbyrathore.com
+    http:
+      paths:
+        - backend:
+            serviceName: "user-interface-svc"
+            servicePort: 3000
