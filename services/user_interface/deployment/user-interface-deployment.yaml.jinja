@@ -24,8 +24,3 @@ spec:
           protocol: TCP
         name: "user-interface"
         command: ["npm", "start"]
-{#        env:#}
-{#        {%- for item in user_interface_envs %}#}
-{#        - name: {{ item }}#}
-{#          value: {{ user_interface_envs[item] }}#}
-{#        {%- endfor %}#}

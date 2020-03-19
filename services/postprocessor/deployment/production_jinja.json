@@ -4,7 +4,7 @@
   "loadBalancerIp": "35.238.62.222",
   "loadBalancerUrl": "api.bobbyrathore.com",
   "postprocessor_image_pull_policy": "Always",
-  "postprocessor_version_tag": "init",
+  "postprocessor_version_tag": "postprocessor_ms",
   "postprocessor_image_name": "gcr.io/weather-forecast-266119/postprocessor",
   "postprocessor_envs": {
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
