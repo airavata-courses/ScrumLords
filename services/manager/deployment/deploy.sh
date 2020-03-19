@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 echo "Fetching cluster credentials..."
-gcloud container clusters get-credentials weather-forecast-cluster --zone us-central1-c --project weather-forecast-266119
+gcloud container clusters get-credentials weather-forecast-cluster --zone us-central1-c --project "$PROJECT_ID"
 echo -e "Done.\n\n"
 
 echo "Installing jinja2, j2-client and jq"
