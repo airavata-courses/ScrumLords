@@ -58,7 +58,7 @@ export const WeatherContainer = () => {
         }
         */
 
-        fetch(`http://api.openweathermap.org/data/2.5/weather?q=${searchQuery1},${searchQuery2},us&units=imperial&appid=${API_KEY}`)
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${searchQuery1},${searchQuery2},us&units=imperial&appid=${API_KEY}`)
             .then(res => res.json())
             .then(async data => {
 
