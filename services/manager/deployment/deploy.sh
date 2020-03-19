@@ -3,6 +3,7 @@
 echo "Fetching cluster credentials..."
 gcloud container clusters get-credentials weather-forecast-cluster --zone us-central1-c --project weather-forecast-266119
 echo -e "Done.\n\n"
+pwd
 
 echo "Installing jinja2, j2-client and jq"
 pip install jinja2 j2cli
