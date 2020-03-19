@@ -1,0 +1,17 @@
+{
+  "minikube": false,
+  "kube_namespace": "default",
+  "loadBalancerIp": "35.238.62.222",
+  "loadBalancerUrl": "api.bobbyrathore.com",
+  "session_manager_image_pull_policy": "Always",
+  "session_manager_version_tag": "init",
+  "session_manager_image_name": "gcr.io/weather-forecast-266119/session_manager",
+  "session_manager_envs": {
+    "DJANGO_ENV": "development",
+    "PUBSUB_EMULATOR_HOST": "localhost:8085",
+    "PUBSUB_PROJECT_ID": "weather-forecast-266119",
+    "REDIS_HOST": "redis://:L9l9Sup9Vl@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "GOOGLE_APPLICATION_CREDENTIALS": "./manager/firestore/pubsub-firestore-development.json",
+    "BIND_ON": "0.0.0.0:8100"
+  }
+}
