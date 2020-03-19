@@ -13,8 +13,8 @@ function Copyright() {
     return (
         <Typography variant="body2" color="textSecondary" align="center">
             {'Copyright © '}
-            <Link color="inherit" href="https://material-ui.com/">
-                Weather.io
+            <Link color="inherit" href="https://github.com/airavata-courses/ScrumLords">
+                ScrumLords
         </Link>{' '}
             {new Date().getFullYear()}
         </Typography>
@@ -82,6 +82,7 @@ const Register = (props) => {
     };
 
     if (props.isAuthenticated) {
+        alert('Registe Success!')
         return <Redirect to='/dashboard' />
     }
 
