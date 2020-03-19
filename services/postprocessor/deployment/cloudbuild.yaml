@@ -1,0 +1,53 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    id: Pull base image
+    entrypoint: "bash"
+    args: ["-c", "docker pull gcr.io/$PROJECT_ID/postprocessor:$BRANCH_NAME || exit 0"]
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: Build new image cached from base
+    dir: "services/postprocessor"
+    args: [
+      "build",
+      "-t",
+      "postprocessor:$SHORT_SHA",
+      "--cache-from",
+      "gcr.io/$PROJECT_ID/postprocessor:$BRANCH_NAME",
+      "."
+    ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: Tag image with commit
+    args: [
+      "tag",
+      "postprocessor:$SHORT_SHA",
+      "gcr.io/$PROJECT_ID/postprocessor:$SHORT_SHA"
+    ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: Tag image with branch-name
+    args: [
+      "tag",
+      "postprocessor:$SHORT_SHA",
+      "gcr.io/$PROJECT_ID/postprocessor:$BRANCH_NAME"
+    ]
+
+  - name: "gcr.io/cloud-builders/docker"
+    id: Push commit tagged image
+    args: [
+      "push",
+      "gcr.io/$PROJECT_ID/postprocessor:$SHORT_SHA"
+    ]
+
+  - name: "gcr.io/cloud-builders/kubectl"
+    id: Apply new deployment
+    dir: "services/postprocessor/deployment"
+    entrypoint: "bash"
+    args: ["deploy.sh"]
+    env:
+      - "LC=$SHORT_SHA"
+      - "PROJECT_ID=$PROJECT_ID"
+      - "BRANCH_NAME=$BRANCH_NAME"
+
+images:
+  - "gcr.io/$PROJECT_ID/postprocessor:$BRANCH_NAME"
