@@ -27,7 +27,7 @@
     "UPDATE_SESSION_ENDPOINT": "https://session.bobbyrathore.com/session/update",
     "POST_PROCESS_TOPIC": "post_process",
     "POST_PROCESS_ENDPOINT": "https://postprocessor.bobbyrathore.com/process/analyze",
-    "GOOGLE_APPLICATION_CREDENTIALS": "/manager/api_manager/firestore/pubsub-firestore-development.json",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/manager/pubsub-firestore-development.json",
     "BIND_ON": "0.0.0.0:8000"
   }
 }
