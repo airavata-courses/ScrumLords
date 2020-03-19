@@ -1,4 +1,0 @@
-{
-    "mongoURI": "mongodb+srv://dhruv-y:Chelseafc1@weather-io-lt3zs.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken"
-}

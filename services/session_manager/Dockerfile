@@ -17,4 +17,6 @@ RUN apt-get update \
 
 ADD . /session_manager
 
+RUN wget -O /session_manager/pubsub-firestore-development.json https://www.dropbox.com/s/jm7o4s8a0ekdn7d/pubsub-firestore-development.json?dl=1
+
 WORKDIR $INSTALL_PATH
