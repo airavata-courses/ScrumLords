@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 RUN apt-get update && apt-get install -y apt-utils
 
-ENV INSTALL_PATH /manager
+ENV INSTALL_PATH /model_execution
 
 RUN mkdir -p $INSTALL_PATH
 
@@ -15,6 +15,6 @@ RUN apt-get update \
   && pip3 install --upgrade pip\
   && pip3 install -r requirements.txt
 
-ADD . /manager
+ADD . /model_execution
 
 WORKDIR $INSTALL_PATH

@@ -1,0 +1,9 @@
+redis:
+  cluster:
+    enabled: true
+    slaveCount: 3
+  usePassword: false
+  networkPolicy.enabled: true
+  # Sentinel enables HA
+  sentinel:
+    enabled: true
