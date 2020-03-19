@@ -13,6 +13,7 @@ steps:
       "manager:$SHORT_SHA",
       "--cache-from",
       "gcr.io/$PROJECT_ID/manager:$BRANCH_NAME",
+      "-f",
       "services/manager/Dockerfile"
     ]
 
