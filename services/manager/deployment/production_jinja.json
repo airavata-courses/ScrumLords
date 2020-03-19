@@ -4,7 +4,7 @@
   "loadBalancerIp": "35.238.62.222",
   "loadBalancerUrl": "api.bobbyrathore.com",
   "manager_image_pull_policy": "Always",
-  "manager_version_tag": "init",
+  "manager_version_tag": "manager_ms",
   "manager_image_name": "gcr.io/weather-forecast-266119/manager",
   "manager_envs": {
     "DJANGO_ENV": "development",
@@ -27,7 +27,7 @@
     "UPDATE_SESSION_ENDPOINT": "https://session.bobbyrathore.com/session/update",
     "POST_PROCESS_TOPIC": "post_process",
     "POST_PROCESS_ENDPOINT": "https://postprocessor.bobbyrathore.com/process/analyze",
-    "GOOGLE_APPLICATION_CREDENTIALS": "./api_manager/firestore/pubsub-firestore-development.json",
+    "GOOGLE_APPLICATION_CREDENTIALS": "/manager/api_manager/firestore/pubsub-firestore-development.json",
     "BIND_ON": "0.0.0.0:8000"
   }
 }
