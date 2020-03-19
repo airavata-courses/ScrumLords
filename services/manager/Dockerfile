@@ -19,6 +19,6 @@ ADD . /manager
 
 RUN pwd && ls
 
-RUN wget -O /manager/api_manager/firestore/pubsub-firestore-development.json https://www.dropbox.com/s/jm7o4s8a0ekdn7d/pubsub-firestore-development.json?dl=1
+RUN wget -O /manager/pubsub-firestore-development.json https://www.dropbox.com/s/jm7o4s8a0ekdn7d/pubsub-firestore-development.json?dl=1
 
 WORKDIR $INSTALL_PATH
