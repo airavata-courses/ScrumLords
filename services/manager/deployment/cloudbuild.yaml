@@ -14,7 +14,8 @@ steps:
       "--cache-from",
       "gcr.io/$PROJECT_ID/manager:$BRANCH_NAME",
       "-f",
-      "services/manager/Dockerfile"
+      "services/manager/Dockerfile",
+      "."
     ]
 
   - name: "gcr.io/cloud-builders/docker"
