@@ -17,7 +17,7 @@ RUN apt-get update \
 
 ADD . /manager
 
-RUN pwd
+RUN pwd && ls
 
 RUN wget -O /manager/api_manager/firestore/pubsub-firestore-development.json https://www.dropbox.com/s/jm7o4s8a0ekdn7d/pubsub-firestore-development.json?dl=1
 
