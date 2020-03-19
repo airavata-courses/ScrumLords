@@ -6,15 +6,13 @@ steps:
 
   - name: "gcr.io/cloud-builders/docker"
     id: Build new image cached from base
-#    dir: "services/manager"
+    dir: "services/manager"
     args: [
       "build",
       "-t",
       "manager:$SHORT_SHA",
       "--cache-from",
       "gcr.io/$PROJECT_ID/manager:$BRANCH_NAME",
-      "-f",
-      "services/manager/Dockerfile",
       "."
     ]
 
