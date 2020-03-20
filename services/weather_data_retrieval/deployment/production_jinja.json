@@ -8,8 +8,8 @@
   "weather_data_retrieval_image_name": "gcr.io/weather-forecast-266119/weather_data_retrieval",
   "weather_data_retrieval_envs": {
     "DJANGO_ENV": "development",
-    "DARK_SKY_API_KEY": "6f6ba60da918163a0ad9753222977026",
-    "REDIS_HOST": "redis://:L9l9Sup9Vl@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "DARK_SKY_API_KEY": "1bb07041eef420056f9f17d496b72a89",
+    "REDIS_HOST": "redis://:17nlGZH9rh@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
     "MODEL_EXECUTE_TOPIC": "model_execute",
     "MODEL_EXECUTE_ENDPOINT": "https://model.bobbyrathore.com/dark/forecast",

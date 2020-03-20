@@ -13,7 +13,7 @@
     "POSTGRES_PASSWORD": "EI6dbPfDn6jCBnOn",
     "POSTGRES_HOST": "35.222.109.219",
     "POSTGRES_PORT": "\"5432\"",
-    "REDIS_HOST": "redis://:L9l9Sup9Vl@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "REDIS_HOST": "redis://:17nlGZH9rh@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
     "DATA_RETRIEVAL_TOPIC": "data_retrieval",
     "DATA_RETRIEVAL_ENDPOINT": "https://retrieval.bobbyrathore.com/dark/history",

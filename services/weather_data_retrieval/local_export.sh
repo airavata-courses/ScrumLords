@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export DJANGO_ENV="development"
-export DARK_SKY_API_KEY="6f6ba60da918163a0ad9753222977026"
+export DARK_SKY_API_KEY="1bb07041eef420056f9f17d496b72a89"
 export PUBSUB_EMULATOR_HOST="localhost:8085"
 export PUBSUB_PROJECT_ID="falana-dhimka"
 export MODEL_EXECUTE_TOPIC="model_execute"
