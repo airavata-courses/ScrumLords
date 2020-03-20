@@ -1,9 +1,9 @@
 steps:
-  - name: "gcr.io/cloud-builders/npm"
+  - name: "node:10.15.1"
     id: Run test cases
     dir: "services/user_server"
-#    entrypoint: "bash"
-    args: ["npm", "install"]
+    entrypoint: "npm"
+    args: ["install"]
 
 
   - name: "gcr.io/cloud-builders/docker"
