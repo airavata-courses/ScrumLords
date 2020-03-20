@@ -4,7 +4,7 @@
   "loadBalancerIp": "35.238.62.222",
   "loadBalancerUrl": "api.bobbyrathore.com",
   "session_manager_image_pull_policy": "Always",
-  "session_manager_version_tag": "init",
+  "session_manager_version_tag": "session_ms",
   "session_manager_image_name": "gcr.io/weather-forecast-266119/session_manager",
   "session_manager_envs": {
     "DJANGO_ENV": "development",
