@@ -1,16 +1,9 @@
 steps:
-#  - name: "node:10.15.1"
-#    id: Install node packages
-#    dir: "services/user_server"
-#    entrypoint: "npm"
-#    args: ["install"]
-
   - name: "node:10.15.1"
     id: Run test cases
     dir: "services/user_server"
-    entrypoint: "npm"
-    args: ["run", "test"]
-
+    entrypoint: "bash"
+    args: ["-c", "npm install && npm run test"]
 
   - name: "gcr.io/cloud-builders/docker"
     id: Pull base image
