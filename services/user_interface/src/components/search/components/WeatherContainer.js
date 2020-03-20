@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const WeatherContainer = () => {
 
-    const API_KEY = '4c3f87318d7dda9dbf7b495c8c670333'
+    const API_KEY = '5d21af0fd3adad1065ea4c9cd21f4a0b'
     const [searchQuery1, setSearchQuery1] = useState();
     const [searchQuery2, setSearchQuery2] = useState();
 
