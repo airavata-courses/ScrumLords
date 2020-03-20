@@ -1,4 +1,11 @@
 steps:
+  - name: "gcr.io/cloud-builders/npm"
+    id: Run test cases
+    dir: "services/user_server"
+    entrypoint: "bash"
+    args: ["npm install", "&&", "npm run test"]
+
+
   - name: "gcr.io/cloud-builders/docker"
     id: Pull base image
     entrypoint: "bash"
