@@ -2,7 +2,7 @@
 
 This is our repository for developing a Weather Forecast Platform, spread across multiple microservices that are deployed, managed and continuously delivered on GCP.
 
-**Technologies used:** Django, Postgres, Cloud Firestore, Cloud Pubsub, Redis, SpringBoot, Express, Google Kubernetes Engine, Cloud Run, Cloud Build, Google Container Registry
+**Technologies used:** Django, Postgres, Cloud Firestore, Cloud Pubsub, Redis, SpringBoot, Express, Google Kubernetes Engine, Cloud Build, Google Container Registry, Nginx Load Balancer, Cert Manager, LetsEncrypt.
 
 ![architecture_diagram](/diagrams/Architecture-milestone-1.png)
 
