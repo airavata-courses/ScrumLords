@@ -1,4 +1,4 @@
-# Scrum Lords
+# ScrumLords
 
 This is our repository for developing a Weather Forecast Platform, spread across multiple microservices that will be deployed, managed and delivered entirely on GCP. Currently, we've built each loosely coupled service independently and orchestrated the message delivery system using Cloud Pubsub emulator. Stay tuned for more!
 
@@ -6,7 +6,7 @@ This is our repository for developing a Weather Forecast Platform, spread across
 
 **Technologies coming next:** Google Kubernetes Engine, Cloud Run, Cloud Build, Google Container Registry, Elasticsearch
 
-![architecture_diagram](/architecture_diagrams/Architecture-milestone-1.png)
+![architecture_diagram](/diagrams/Architecture-milestone-1.png)
 
 For setup and installation steps, click [here](https://github.com/airavata-courses/ScrumLords/wiki/Get-up-and-running).
 
