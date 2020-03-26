@@ -9,7 +9,7 @@
   "weather_data_retrieval_envs": {
     "DJANGO_ENV": "development",
     "DARK_SKY_API_KEY": "1bb07041eef420056f9f17d496b72a89",
-    "REDIS_HOST": "redis://:17nlGZH9rh@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "REDIS_HOST": "redis://:s7sXbdjVP7@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
     "MODEL_EXECUTE_TOPIC": "model_execute",
     "MODEL_EXECUTE_ENDPOINT": "https://model.bobbyrathore.com/dark/forecast",

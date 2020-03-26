@@ -10,7 +10,7 @@
     "DJANGO_ENV": "development",
     "DARK_SKY_API_KEY": "1bb07041eef420056f9f17d496b72a89",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
-    "REDIS_HOST": "redis://:17nlGZH9rh@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "REDIS_HOST": "redis://:s7sXbdjVP7@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
     "UPDATE_STATUS_TOPIC": "update_status",
     "UPDATE_STATUS_ENDPOINT": "https://manager.bobbyrathore.com/session/status",
     "UPDATE_SESSION_TOPIC": "update_session",
