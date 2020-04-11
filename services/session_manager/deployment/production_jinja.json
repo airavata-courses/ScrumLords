@@ -10,7 +10,7 @@
     "DJANGO_ENV": "development",
     "PUBSUB_EMULATOR_HOST": "localhost:8085",
     "PUBSUB_PROJECT_ID": "weather-forecast-266119",
-    "REDIS_HOST": "redis://:s7sXbdjVP7@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
+    "REDIS_HOST": "redis://:KdjVX0ZKMp@scrumlords-weather-redis-master.default.svc.cluster.local:6379",
     "GOOGLE_APPLICATION_CREDENTIALS": "/session_manager/pubsub-firestore-development.json",
     "BIND_ON": "0.0.0.0:8100"
   }
