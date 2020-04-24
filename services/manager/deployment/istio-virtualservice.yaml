@@ -1,0 +1,50 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: istio-virtualservice
+spec:
+  hosts:
+  - scrumlordsweather.bobbyrathore.com
+  gateways:
+  - istio-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /manager
+    route:
+    - destination:
+        host: manager-svc
+        port:
+          number: 8000
+  - match:
+    - uri:
+        prefix: /session_manager
+    route:
+    - destination:
+        host: session-manager-svc
+        port:
+          number: 8100
+  - match:
+    - uri:
+        prefix: /weather_data_retrieval
+    route:
+    - destination:
+        host: data-retrieval-svc
+        port:
+          number: 8200
+  - match:
+    - uri:
+        prefix: /model_execution
+    route:
+    - destination:
+        host: model-execution-svc
+        port:
+          number: 8300
+  - match:
+    - uri:
+        prefix: /postprocess
+    route:
+    - destination:
+        host: postprocessor-svc
+        port:
+          number: 8400
