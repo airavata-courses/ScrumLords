@@ -8,8 +8,8 @@ spec:
     istio: ingressgateway # use istio default controller
   servers:
   - port:
-      number: 15031
-      name: http-grafana
+      number: 80
+      name: http
       protocol: HTTP
     hosts:
     - "*"
@@ -25,12 +25,13 @@ spec:
   - grafana-gateway
   http:
   - match:
-    - port: 15031
+    - uri:
+        prefix: "/"
     route:
     - destination:
-        host: grafana
         port:
           number: 3000
+        host: grafana 
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
