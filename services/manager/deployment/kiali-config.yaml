@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kiali
+  namespace: default
+  labels:
+    app: kiali
+type: Opaque
+data:
+  username: scrumlords
+  passphrase: scrumlords123
