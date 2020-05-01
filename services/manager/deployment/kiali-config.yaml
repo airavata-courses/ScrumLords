@@ -7,5 +7,5 @@ metadata:
     app: kiali
 type: Opaque
 data:
-  username: scrumlords
-  passphrase: scrumlords123
+  username: admin
+  passphrase: admin

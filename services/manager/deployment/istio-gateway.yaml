@@ -11,5 +11,5 @@ spec:
       name: http
       protocol: HTTP
     hosts:
-    - scrumlordsweather.bobbyrathore.com
+    - '*'
     

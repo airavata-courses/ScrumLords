@@ -4,7 +4,7 @@ metadata:
   name: manager-vs
 spec:
   hosts:
-  - manager.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -20,7 +20,7 @@ metadata:
   name: session-manager-vs
 spec:
   hosts:
-  - session.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -36,7 +36,7 @@ metadata:
   name: data-retrieval-vs
 spec:
   hosts:
-  - retrieval.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -52,7 +52,7 @@ metadata:
   name: model-execution-vs
 spec:
   hosts:
-  - model.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -68,7 +68,7 @@ metadata:
   name: postprocessor-vs
 spec:
   hosts:
-  - postprocessor.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -84,7 +84,7 @@ metadata:
   name: user-server-vs
 spec:
   hosts:
-  - userserver.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
@@ -100,7 +100,7 @@ metadata:
   name: user-interface-vs
 spec:
   hosts:
-  - scrumlordsweather.bobbyrathore.com
+  - '*'
   gateways:
   - istio-gateway
   http:
