@@ -10,6 +10,6 @@ spec:
   http:
   - route:
     - destination:
-        host: user-interface-svc
+        host: user-interface-svc.default.svc.cluster.local
         port:
           number: 3000
