@@ -2,13 +2,13 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: kiali-gateway
-  namespace: default
+  namespace: istio-system
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: ingressgateway
   servers:
   - port:
-      number: 20001
+      number: 15029
       name: http-kiali
       protocol: HTTP
     hosts:
@@ -18,6 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: kiali-vs
+  namespace: istio-system
 spec:
   hosts:
   - "*"
@@ -25,7 +26,7 @@ spec:
   - kiali-gateway
   http:
   - match:
-    - port: 20001
+    - port: 15029
     route:
     - destination:
         host: kiali
@@ -36,8 +37,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: kiali
+  namespace: istio-system
 spec:
   host: kiali
   trafficPolicy:
     tls:
       mode: DISABLE
+---

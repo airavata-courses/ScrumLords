@@ -2,10 +2,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
   name: grafana-gateway
-  namespace: default
+  namespace: istio-system
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: ingressgateway
   servers:
   - port:
       number: 15031
@@ -18,6 +18,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: grafana-vs
+  namespace: istio-system
 spec:
   hosts:
   - "*"
@@ -36,8 +37,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: grafana
+  namespace: istio-system
 spec:
   host: grafana
   trafficPolicy:
     tls:
       mode: DISABLE
+---

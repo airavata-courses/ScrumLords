@@ -7,5 +7,5 @@ metadata:
     app: kiali
 type: Opaque
 data:
-  username: admin
-  passphrase: admin
+  username: YWRtaW4=
+  passphrase: YWRtaW4=
