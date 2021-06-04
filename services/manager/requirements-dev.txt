@@ -6,7 +6,7 @@ cachetools==4.0.0
 certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
-Django==3.0.3
+Django==3.1.9
 django-cors-headers==3.2.1
 django-extensions==2.2.6
 django-model-utils==4.0.0
